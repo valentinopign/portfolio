@@ -1,0 +1,28 @@
+<div
+  id="arm-box"
+  class="relative flex-[1_1_auto] min-h-[440px] bg-ink border-2 border-ink overflow-hidden"
+>
+  <canvas id="arm-canvas" class="absolute inset-0 block"></canvas>
+  <div class="absolute top-3 left-3.5 right-3.5 flex justify-between text-[10px] tracking-[0.18em] uppercase text-[rgba(236,234,227,0.55)] pointer-events-none">
+    <span>UNIT VP−01 / PICK &amp; PLACE</span>
+    <span class="text-flame">● LIVE</span>
+  </div>
+  <div class="absolute bottom-3 left-3.5 right-3.5 flex justify-between text-[10px] tracking-[0.16em] uppercase text-[rgba(236,234,227,0.4)] pointer-events-none">
+    <span>SYS.STATUS: OPERATIONAL</span>
+    <span>0 FAILURES</span>
+  </div>
+  <span class="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 border-flame"></span>
+  <span class="absolute top-2 right-2 w-3.5 h-3.5 border-t-2 border-r-2 border-flame"></span>
+  <span class="absolute bottom-2 left-2 w-3.5 h-3.5 border-b-2 border-l-2 border-flame"></span>
+  <span class="absolute bottom-2 right-2 w-3.5 h-3.5 border-b-2 border-r-2 border-flame"></span>
+</div>
+
+<script>
+  import { initRoboticArm } from "../scripts/robotic-arm";
+  const box = document.getElementById("arm-box");
+  const canvas = document.getElementById("arm-canvas") as HTMLCanvasElement | null;
+  if (box && canvas) {
+    const handle = initRoboticArm(box, canvas);
+    window.addEventListener("beforeunload", () => handle.cleanup());
+  }
+</script>
