@@ -1,0 +1,37 @@
+<section class="bg-ink text-bone px-[clamp(20px,5vw,72px)] py-[clamp(40px,6vw,72px)] border-t-[3px] border-b-[3px] border-flame">
+  <div class="max-w-[1320px] mx-auto">
+    <div class="flex flex-wrap items-baseline gap-4 mb-[clamp(20px,3vw,32px)]">
+      <span class="text-[12px] tracking-[0.22em] font-bold uppercase text-flame">//</span>
+      <span class="marker-line bg-flame"></span>
+      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">RUNTIME_LOOP</span>
+    </div>
+    <div
+      id="loop-box"
+      class="relative w-full h-[clamp(260px,34vw,420px)] bg-ink border-2 border-flame overflow-hidden"
+    >
+      <canvas id="loop-canvas" class="absolute inset-0 block"></canvas>
+      <div class="absolute top-3 left-3.5 right-3.5 flex justify-between text-[10px] tracking-[0.18em] uppercase text-[rgba(236,234,227,0.55)] pointer-events-none">
+        <span>AGENTIC LOOP / SELF-SUSTAINING</span>
+        <span class="text-flame">● CYCLING</span>
+      </div>
+      <div class="absolute bottom-3 left-3.5 right-3.5 flex justify-between text-[10px] tracking-[0.16em] uppercase text-[rgba(236,234,227,0.4)] pointer-events-none">
+        <span>THROUGHPUT: NOMINAL</span>
+        <span>LATENCY: LOW</span>
+      </div>
+      <span class="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 border-flame"></span>
+      <span class="absolute top-2 right-2 w-3.5 h-3.5 border-t-2 border-r-2 border-flame"></span>
+      <span class="absolute bottom-2 left-2 w-3.5 h-3.5 border-b-2 border-l-2 border-flame"></span>
+      <span class="absolute bottom-2 right-2 w-3.5 h-3.5 border-b-2 border-r-2 border-flame"></span>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initAsciiLoop } from "../scripts/ascii-loop";
+  const box = document.getElementById("loop-box");
+  const canvas = document.getElementById("loop-canvas") as HTMLCanvasElement | null;
+  if (box && canvas) {
+    const handle = initAsciiLoop(box, canvas);
+    window.addEventListener("beforeunload", () => handle.cleanup());
+  }
+</script>
