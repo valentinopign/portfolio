@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:#141210;-webkit-font-smoothing:antialiased;}
+  ::selection{background:#FF4D00;color:#141210;}
+  @keyframes vpblink{0%,48%{opacity:1}49%,100%{opacity:0}}
+  @keyframes vpmarquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+</style>
+</helmet>
+
+<div style="background:#141210;font-family:'IBM Plex Mono',monospace;color:#ECEAE3;width:100%;overflow:hidden;">
+
+  <!-- ░░ TOP STATUS BAR ░░ -->
+  <div data-screen-label="Status Bar" style="background:#FF4D00;color:#141210;border-top:9px solid #141210;border-bottom:3px solid #141210;box-shadow:0 -16px 0 -13px #141210, 0 -24px 0 -21px #141210;">
+    <div style="max-width:1320px;margin:0 auto;padding:14px clamp(20px,5vw,72px);">
+      <div style="display:flex;flex-wrap:wrap;gap:10px 28px;font-size:11px;letter-spacing:0.16em;font-weight:500;text-transform:uppercase;opacity:0.92;">
+        <span>IDE &rsaquo; TERMINAL &rsaquo; SLACK</span>
+        <span>&mdash;&mdash;</span>
+        <span>BUENOS AIRES / ARG</span>
+        <span>&mdash;&mdash;</span>
+        <span>STATE: AVAILABLE 24/7</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin-top:10px;font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:800;font-variation-settings:'wght' 800,'wdth' 118;font-size:clamp(18px,2.6vw,30px);letter-spacing:-0.01em;">
+        <span>[ AI&nbsp;PRODUCT&nbsp;DEV ]</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:0.7em;">::</span>
+        <span>[ 0&nbsp;&rarr;&nbsp;PROD ]</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:0.7em;">::</span>
+        <span>[ OPEN&nbsp;TO&nbsp;WORK ]</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ░░ HERO ░░ -->
+  <section data-screen-label="Hero" style="background:#FF4D00;color:#141210;padding:clamp(40px,6vw,84px) clamp(20px,5vw,72px) clamp(28px,4vw,56px);">
+    <div style="max-width:1320px;margin:0 auto;">
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(32px,4vw,64px);align-items:stretch;">
+
+        <!-- left: identity -->
+        <div style="flex:2 1 460px;min-width:300px;display:flex;flex-direction:column;justify-content:center;">
+          <div style="display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:500;margin-bottom:clamp(20px,3vw,34px);">
+            <span style="width:9px;height:9px;background:#141210;display:inline-block;"></span>
+            <span>[ LOC: &minus;34.6037&deg; / &minus;58.3816&deg; &middot; BUENOS AIRES ]</span>
+          </div>
+
+          <h1 style="margin:0;font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:900;font-variation-settings:'wght' 900,'wdth' 125;font-size:clamp(52px,9vw,148px);line-height:0.84;letter-spacing:-0.03em;text-transform:uppercase;">VALENT&Iacute;N<br>PIGNATELLI</h1>
+
+          <div style="margin-top:clamp(22px,3vw,34px);max-width:560px;border-left:3px solid #141210;padding-left:20px;">
+            <p style="margin:0;font-size:clamp(13px,1.5vw,16px);letter-spacing:0.14em;text-transform:uppercase;font-weight:600;">AI PRODUCT DEVELOPER &mdash; DE CERO A PRODUCCI&Oacute;N</p>
+            <p style="margin:14px 0 0;font-size:clamp(14px,1.6vw,17px);line-height:1.55;font-weight:400;">Construyo productos completos con IA: arquitectura backend, frontend, deployment y comercializaci&oacute;n. Dise&ntilde;o loops agénticos que resuelven problemas verticales reales.</p>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:clamp(26px,3.5vw,40px);">
+            <a href="#proyectos" style="background:#141210;color:#ECEAE3;text-decoration:none;padding:16px 30px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;border:2px solid #141210;transition:all 0.18s;" style-hover="background:#ECEAE3;color:#141210;">Ver Proyectos &rarr;</a>
+            <a href="#contacto" style="background:transparent;color:#141210;text-decoration:none;padding:16px 30px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;border:2px solid #141210;transition:all 0.18s;" style-hover="background:#141210;color:#ECEAE3;">Contacto</a>
+          </div>
+        </div>
+
+        <!-- right: ASCII robotic arm panel -->
+        <div style="flex:1 1 380px;min-width:300px;display:flex;flex-direction:column;">
+          <div ref="{{ armBox }}" style="position:relative;flex:1 1 auto;min-height:440px;background:#141210;border:2px solid #141210;overflow:hidden;">
+            <canvas ref="{{ armCanvas }}" style="position:absolute;inset:0;display:block;"></canvas>
+            <div style="position:absolute;top:12px;left:14px;right:14px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(236,234,227,0.55);pointer-events:none;">
+              <span>UNIT VP&minus;01 / PICK &amp; PLACE</span>
+              <span style="color:#FF4D00;">&#9679; LIVE</span>
+            </div>
+            <div style="position:absolute;bottom:12px;left:14px;right:14px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(236,234,227,0.4);pointer-events:none;">
+              <span>SYS.STATUS: OPERATIONAL</span>
+              <span>0 FAILURES</span>
+            </div>
+            <span style="position:absolute;top:8px;left:8px;width:14px;height:14px;border-top:2px solid #FF4D00;border-left:2px solid #FF4D00;"></span>
+            <span style="position:absolute;top:8px;right:8px;width:14px;height:14px;border-top:2px solid #FF4D00;border-right:2px solid #FF4D00;"></span>
+            <span style="position:absolute;bottom:8px;left:8px;width:14px;height:14px;border-bottom:2px solid #FF4D00;border-left:2px solid #FF4D00;"></span>
+            <span style="position:absolute;bottom:8px;right:8px;width:14px;height:14px;border-bottom:2px solid #FF4D00;border-right:2px solid #FF4D00;"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- bottom readout strip -->
+      <div style="display:flex;flex-wrap:wrap;gap:10px 36px;margin-top:clamp(30px,4vw,52px);padding-top:18px;border-top:2px solid #141210;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;font-weight:500;">
+        <span>CORE_SYS: ONLINE</span>
+        <span>STACK: MATURE</span>
+        <span>MODEL: CLAUDE</span>
+        <span>FOCUS: AGENTIC&nbsp;LOOPS</span>
+        <span style="margin-left:auto;">&copy; 2026 &mdash; VP</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ MARQUEE DIVIDER ░░ -->
+  <div style="background:#141210;overflow:hidden;border-top:3px solid #FF4D00;border-bottom:3px solid #FF4D00;">
+    <div style="display:inline-flex;white-space:nowrap;will-change:transform;animation:vpmarquee 32s linear infinite;padding:13px 0;">
+      <span style="color:#FF4D00;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;">&nbsp;AGENTIC LOOPS&nbsp;&nbsp;&#10031;&nbsp;&nbsp;AI PRODUCT&nbsp;&nbsp;&#10031;&nbsp;&nbsp;0 &rarr; PRODUCTION&nbsp;&nbsp;&#10031;&nbsp;&nbsp;BUENOS AIRES / ARG&nbsp;&nbsp;&#10031;&nbsp;&nbsp;ESCRIBANIA&reg;&nbsp;&nbsp;&#10031;&nbsp;&nbsp;CLAUDE API&nbsp;&nbsp;&#10031;&nbsp;&nbsp;FULL-STACK&nbsp;&nbsp;&#10031;&nbsp;&nbsp;</span>
+      <span style="color:#FF4D00;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;">&nbsp;AGENTIC LOOPS&nbsp;&nbsp;&#10031;&nbsp;&nbsp;AI PRODUCT&nbsp;&nbsp;&#10031;&nbsp;&nbsp;0 &rarr; PRODUCTION&nbsp;&nbsp;&#10031;&nbsp;&nbsp;BUENOS AIRES / ARG&nbsp;&nbsp;&#10031;&nbsp;&nbsp;ESCRIBANIA&reg;&nbsp;&nbsp;&#10031;&nbsp;&nbsp;CLAUDE API&nbsp;&nbsp;&#10031;&nbsp;&nbsp;FULL-STACK&nbsp;&nbsp;&#10031;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- ░░ 01 SOBRE MÍ ░░ -->
+  <section data-screen-label="Sobre mí" style="background:#FF4D00;color:#141210;padding:clamp(56px,8vw,120px) clamp(20px,5vw,72px);">
+    <div style="max-width:1320px;margin:0 auto;">
+      <div style="display:flex;align-items:baseline;gap:16px;margin-bottom:clamp(36px,5vw,64px);">
+        <span style="font-size:12px;letter-spacing:0.22em;font-weight:700;text-transform:uppercase;">01</span>
+        <span style="flex:1;height:2px;background:#141210;"></span>
+        <span style="font-size:12px;letter-spacing:0.22em;font-weight:700;text-transform:uppercase;">SOBRE_M&Iacute;</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(32px,5vw,72px);align-items:start;">
+        <div>
+          <h2 style="margin:0;font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:900;font-variation-settings:'wght' 880,'wdth' 110;font-size:clamp(28px,3.6vw,52px);line-height:0.98;letter-spacing:-0.02em;">T&eacute;cnico en Electr&oacute;nica + Estudiante de Ingenier&iacute;a Inform&aacute;tica. <span style="opacity:0.5;">Autodidacta en desarrollo con IA.</span></h2>
+        </div>
+        <div style="font-size:clamp(14px,1.5vw,16px);line-height:1.65;font-weight:400;">
+          <p style="margin:0 0 18px;">No solo implemento modelos: dise&ntilde;o sistemas agénticos que resuelven problemas verticales espec&iacute;ficos, desde la arquitectura hasta el deployment.</p>
+          <p style="margin:0 0 28px;">Mi enfoque es construir productos que lleguen a producci&oacute;n &mdash; usados por clientes reales &mdash; no demos ni pruebas de concepto.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#141210;border:2px solid #141210;">
+            <div style="background:#FF4D00;padding:14px 16px;"><div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;">ROLE</div><div style="font-weight:600;margin-top:4px;font-size:13px;letter-spacing:0.04em;">AI PRODUCT DEV</div></div>
+            <div style="background:#FF4D00;padding:14px 16px;"><div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;">BASE</div><div style="font-weight:600;margin-top:4px;font-size:13px;letter-spacing:0.04em;">BUENOS AIRES, AR</div></div>
+            <div style="background:#FF4D00;padding:14px 16px;"><div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;">FOCUS</div><div style="font-weight:600;margin-top:4px;font-size:13px;letter-spacing:0.04em;">AGENTIC SYSTEMS</div></div>
+            <div style="background:#FF4D00;padding:14px 16px;"><div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;">STATE</div><div style="font-weight:600;margin-top:4px;font-size:13px;letter-spacing:0.04em;">SHIPPING</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ 02 PROCESO ░░ -->
+  <section data-screen-label="Proceso" style="background:#ECEAE3;color:#141210;padding:clamp(56px,8vw,120px) clamp(20px,5vw,72px);">
+    <div style="max-width:1320px;margin:0 auto;">
+      <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:16px;margin-bottom:clamp(8px,2vw,20px);">
+        <span style="font-size:12px;letter-spacing:0.22em;font-weight:700;text-transform:uppercase;color:#FF4D00;">02</span>
+        <span style="flex:1;height:2px;background:#141210;min-width:40px;"></span>
+        <span style="font-size:12px;letter-spacing:0.22em;font-weight:700;text-transform:uppercase;">C&Oacute;MO_CONSTRUYO</span>
+      </div>
+      <h2 style="margin:0 0 clamp(28px,4vw,48px);font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:900;font-variation-settings:'wght' 900,'wdth' 122;font-size:clamp(30px,5vw,72px);line-height:0.9;letter-spacing:-0.025em;text-transform:uppercase;">PIPELINE / 0 &rarr; PROD</h2>
+
+      <div style="border-top:2px solid #141210;">
+        <!-- row -->
+        <div style="display:grid;grid-template-columns:clamp(56px,8vw,110px) minmax(0,1.4fr) minmax(0,1.6fr);gap:clamp(12px,3vw,40px);align-items:center;padding:clamp(18px,2.4vw,30px) 0;border-bottom:1px solid rgba(20,18,16,0.18);">
+          <span style="font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:900;font-variation-settings:'wght' 900,'wdth' 70;font-size:clamp(40px,6vw,92px);line-height:0.8;">01</span>
+          <span style="font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:800;font-variation-settings:'wght' 800,'wdth' 118;font-size:clamp(18px,2.4vw,34px);letter-spacing:-0.01em;text-transform:uppercase;">Se&ntilde;al</span>
+          <span style="font-size:clamp(11px,1.3vw,14px);line-height:1.6;letter-spacing:0.04em;">Detecto un problema vertical real y costoso. <span style="color:#FF4D00;">[ TAREA RECIBIDA ] [ CONTEXTO CARGADO ]</span></span>
+        </div>
+        <div style="display:grid;grid-template-columns:clamp(56px,8vw,110px) minmax(0,1.4fr) minmax(0,1.6fr);gap:clamp(12px,3vw,40px);align-items:center;padding:clamp(18px,2.4vw,30px) 0;border-bottom:1px solid rgba(20,18,16,0.18);">
+          <span style="font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:900;font-variation-settings:'wght' 900,'wdth' 70;font-size:clamp(40px,6vw,92px);line-height:0.8;">02</span>
+          <span style="font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:800;font-variation-settings:'wght' 800,'wdth' 118;font-size:clamp(18px,2.4vw,34px);letter-spacing:-0.01em;text-transform:uppercase;">Contexto</span>
+          <span style="font-size:clamp(11px,1.3vw,14px);line-height:1.6;letter-spacing:0.04em;">Modelo el dominio y mapeo el flujo de datos. <span style="color:#FF4D00;">[ INDEXANDO ] [ DEPENDENCIAS MAPEADAS ]</span></span>
+        </div>
+        <div style="display:grid;grid-template-columns:clamp(56px,8vw,110px) minmax(0,1.4fr) minmax(0,1.6fr);gap:clamp(12px,3vw,40px);align-items:center;padding:clamp(18px,2.4vw,30px) 0;border-bottom:1px solid rgba(20,18,16,0.18);">
+          <span style="font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:900;font-variation-settings:'wght' 900,'wdth' 70;font-size:clamp(40px,6vw,92px);line-height:0.8;">03</span>
+          <span style="font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:800;font-variation-settings:'wght' 800,'wdth' 118;font-size:clamp(18px,2.4vw,34px);letter-spacing:-0.01em;text-transform:uppercase;">Ejecuci&oacute;n</span>
+          <span style="font-size:clamp(11px,1.3vw,14px);line-height:1.6;letter-spacing:0.04em;">Construyo el loop agéntico: backend, IA y frontend. <span style="color:#FF4D00;">[ BUILD ] [ API + UI ]</span></span>
+        </div>
+        <div style="display:grid;grid-template-columns:clamp(56px,8vw,110px) minmax(0,1.4fr) minmax(0,1.6fr);gap:clamp(12px,3vw,40px);align-items:center;padding:clamp(18px,2.4vw,30px) 0;border-bottom:1px solid rgba(20,18,16,0.18);">
+          <span style="font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:900;font-variation-settings:'wght' 900,'wdth' 70;font-size:clamp(40px,6vw,92px);line-height:0.8;">04</span>
+          <span style="font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:800;font-variation-settings:'wght' 800,'wdth' 118;font-size:clamp(18px,2.4vw,34px);letter-spacing:-0.01em;text-transform:uppercase;">Validaci&oacute;n</span>
+          <span style="font-size:clamp(11px,1.3vw,14px);line-height:1.6;letter-spacing:0.04em;">Pruebo contra casos reales y audito resultados. <span style="color:#FF4D00;">[ TEST PASS ] [ AUDITED ]</span></span>
+        </div>
+        <div style="display:grid;grid-template-columns:clamp(56px,8vw,110px) minmax(0,1.4fr) minmax(0,1.6fr);gap:clamp(12px,3vw,40px);align-items:center;padding:clamp(18px,2.4vw,30px) 0;border-bottom:2px solid #141210;">
+          <span style="font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:900;font-variation-settings:'wght' 900,'wdth' 70;font-size:clamp(40px,6vw,92px);line-height:0.8;color:#FF4D00;">05</span>
+          <span style="font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:800;font-variation-settings:'wght' 800,'wdth' 118;font-size:clamp(18px,2.4vw,34px);letter-spacing:-0.01em;text-transform:uppercase;color:#FF4D00;">Deploy</span>
+          <span style="font-size:clamp(11px,1.3vw,14px);line-height:1.6;letter-spacing:0.04em;">Producci&oacute;n + comercializaci&oacute;n. Clientes reales. <span style="color:#FF4D00;">[ ENV: PRODUCTION ] [ LIVE ]</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ 03 STACK ░░ -->
+  <section data-screen-label="Stack técnico" style="background:#ECEAE3;color:#141210;padding:0 clamp(20px,5vw,72px) clamp(56px,8vw,120px);">
+    <div style="max-width:1320px;margin:0 auto;">
+      <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:16px;margin-bottom:clamp(24px,4vw,44px);">
+        <span style="font-size:12px;letter-spacing:0.22em;font-weight:700;text-transform:uppercase;color:#FF4D00;">03</span>
+        <span style="flex:1;height:2px;background:#141210;min-width:40px;"></span>
+        <span style="font-size:12px;letter-spacing:0.22em;font-weight:700;text-transform:uppercase;">STACK_T&Eacute;CNICO</span>
+      </div>
+
+      <div style="border:2px solid #141210;">
+        <!-- header -->
+        <div style="display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2fr) minmax(90px,0.9fr);background:#141210;color:#ECEAE3;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:600;">
+          <span style="padding:13px 18px;">CAPA</span>
+          <span style="padding:13px 18px;">HERRAMIENTAS</span>
+          <span style="padding:13px 18px;text-align:right;">STATUS</span>
+        </div>
+        <!-- rows -->
+        <div style="display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2fr) minmax(90px,0.9fr);border-bottom:1px solid rgba(20,18,16,0.2);align-items:center;">
+          <span style="padding:15px 18px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;font-size:13px;">Lenguajes</span>
+          <span style="padding:15px 18px;font-size:13px;letter-spacing:0.04em;">Python &middot; JavaScript &middot; TypeScript</span>
+          <span style="padding:15px 18px;text-align:right;font-size:11px;letter-spacing:0.12em;color:#FF4D00;font-weight:600;">CORE</span>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2fr) minmax(90px,0.9fr);border-bottom:1px solid rgba(20,18,16,0.2);align-items:center;">
+          <span style="padding:15px 18px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;font-size:13px;">Frameworks</span>
+          <span style="padding:15px 18px;font-size:13px;letter-spacing:0.04em;">Flask &middot; Next.js &middot; React</span>
+          <span style="padding:15px 18px;text-align:right;font-size:11px;letter-spacing:0.12em;color:#FF4D00;font-weight:600;">DAILY</span>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2fr) minmax(90px,0.9fr);border-bottom:1px solid rgba(20,18,16,0.2);align-items:center;">
+          <span style="padding:15px 18px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;font-size:13px;">IA</span>
+          <span style="padding:15px 18px;font-size:13px;letter-spacing:0.04em;">Claude API &middot; Loops agénticos &middot; Prompt eng.</span>
+          <span style="padding:15px 18px;text-align:right;font-size:11px;letter-spacing:0.12em;color:#FF4D00;font-weight:600;">FOCUS</span>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2fr) minmax(90px,0.9fr);border-bottom:1px solid rgba(20,18,16,0.2);align-items:center;">
+          <span style="padding:15px 18px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;font-size:13px;">Data / Infra</span>
+          <span style="padding:15px 18px;font-size:13px;letter-spacing:0.04em;">Supabase &middot; PostgreSQL &middot; Deployment</span>
+          <span style="padding:15px 18px;text-align:right;font-size:11px;letter-spacing:0.12em;color:#FF4D00;font-weight:600;">READY</span>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2fr) minmax(90px,0.9fr);align-items:center;">
+          <span style="padding:15px 18px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;font-size:13px;">UI / 3D</span>
+          <span style="padding:15px 18px;font-size:13px;letter-spacing:0.04em;">Three.js &middot; Tailwind &middot; Canvas / WebGL</span>
+          <span style="padding:15px 18px;text-align:right;font-size:11px;letter-spacing:0.12em;color:#FF4D00;font-weight:600;">CRAFT</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ 04 PROYECTOS ░░ -->
+  <section id="proyectos" data-screen-label="Proyectos" style="background:#FF4D00;color:#141210;padding:clamp(56px,8vw,120px) clamp(20px,5vw,72px);">
+    <div style="max-width:1320px;margin:0 auto;">
+      <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:16px;margin-bottom:clamp(36px,5vw,60px);">
+        <span style="font-size:12px;letter-spacing:0.22em;font-weight:700;text-transform:uppercase;">04</span>
+        <span style="flex:1;height:2px;background:#141210;min-width:40px;"></span>
+        <span style="font-size:12px;letter-spacing:0.22em;font-weight:700;text-transform:uppercase;">PROYECTOS</span>
+      </div>
+
+      <!-- featured card -->
+      <div style="display:flex;flex-wrap:wrap;border:2px solid #141210;background:#ECEAE3;">
+        <!-- spine -->
+        <div style="background:#141210;color:#FF4D00;display:flex;align-items:center;justify-content:center;padding:18px 10px;writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:900;font-variation-settings:'wght' 900,'wdth' 118;font-size:clamp(13px,1.4vw,18px);letter-spacing:0.16em;text-transform:uppercase;">PRODUCTO 01 &mdash; EN PRODUCCI&Oacute;N</div>
+
+        <div style="flex:1 1 420px;min-width:280px;padding:clamp(26px,3.5vw,48px);color:#141210;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;">
+            <h3 style="margin:0;font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:900;font-variation-settings:'wght' 900,'wdth' 122;font-size:clamp(40px,6vw,90px);line-height:0.85;letter-spacing:-0.03em;text-transform:uppercase;">Escriban<span style="color:#FF4D00;">IA</span></h3>
+            <a href="https://escriban-ia.com.ar" target="_blank" rel="noopener" style="text-decoration:none;color:#141210;font-size:clamp(22px,3vw,40px);line-height:1;transition:transform 0.18s;" style-hover="transform:translate(3px,-3px);">&#8599;</a>
+          </div>
+          <p style="margin:18px 0 0;font-size:clamp(12px,1.4vw,15px);letter-spacing:0.12em;text-transform:uppercase;font-weight:600;color:#FF4D00;">SaaS vertical con IA para escriban&iacute;as argentinas</p>
+          <p style="margin:16px 0 28px;font-size:clamp(13px,1.5vw,16px);line-height:1.65;max-width:640px;">Producto en producci&oacute;n que automatiza la recolecci&oacute;n de datos, la auditor&iacute;a de documentos societarios y la consulta al Bolet&iacute;n Oficial. Utiliza loops agénticos sobre Claude para resolver tareas reales de oficina.</p>
+
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px;">
+            <span style="border:1.5px solid #141210;padding:6px 12px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;">Python</span>
+            <span style="border:1.5px solid #141210;padding:6px 12px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;">Flask</span>
+            <span style="border:1.5px solid #141210;padding:6px 12px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;">Claude API</span>
+            <span style="border:1.5px solid #141210;padding:6px 12px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;">Supabase</span>
+            <span style="border:1.5px solid #141210;padding:6px 12px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;">Next.js</span>
+            <span style="border:1.5px solid #141210;padding:6px 12px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;">Three.js</span>
+          </div>
+
+          <!-- spec mini table -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:2px solid #141210;border-left:2px solid #141210;">
+            <div style="border-right:2px solid #141210;border-bottom:2px solid #141210;padding:13px 16px;"><div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.55;">DOMINIO</div><div style="font-weight:600;margin-top:5px;font-size:13px;">LEGAL / NOTARIAL</div></div>
+            <div style="border-right:2px solid #141210;border-bottom:2px solid #141210;padding:13px 16px;"><div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.55;">CAPA IA</div><div style="font-weight:600;margin-top:5px;font-size:13px;">AGENTIC LOOPS</div></div>
+            <div style="border-right:2px solid #141210;border-bottom:2px solid #141210;padding:13px 16px;"><div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.55;">ESTADO</div><div style="font-weight:600;margin-top:5px;font-size:13px;color:#FF4D00;">EN PRODUCCI&Oacute;N</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ 05 CONTACTO ░░ -->
+  <section id="contacto" data-screen-label="Contacto" style="background:#141210;color:#ECEAE3;padding:clamp(56px,8vw,120px) clamp(20px,5vw,72px) 0;">
+    <div style="max-width:1320px;margin:0 auto;">
+      <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:16px;margin-bottom:clamp(36px,5vw,56px);">
+        <span style="font-size:12px;letter-spacing:0.22em;font-weight:700;text-transform:uppercase;color:#FF4D00;">05</span>
+        <span style="flex:1;height:2px;background:#FF4D00;min-width:40px;"></span>
+        <span style="font-size:12px;letter-spacing:0.22em;font-weight:700;text-transform:uppercase;">CONTACTO</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(36px,5vw,72px);align-items:start;">
+        <h2 style="margin:0;font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:900;font-variation-settings:'wght' 900,'wdth' 125;font-size:clamp(40px,6.5vw,104px);line-height:0.84;letter-spacing:-0.03em;text-transform:uppercase;">&iquest;CONSTRUIMOS ALGO <span style="color:#FF4D00;">REAL?</span></h2>
+
+        <div style="display:flex;flex-direction:column;gap:0;border-top:2px solid #FF4D00;">
+          <a href="/cdn-cgi/l/email-protection#dfbbbaa9f1a9beb3bab1abb6b1afb6b8b1beabbab3b3b69fb8b2beb6b3f1bcb0b2" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:22px 4px;text-decoration:none;color:#ECEAE3;border-bottom:1px solid rgba(236,234,227,0.18);transition:padding 0.18s,color 0.18s;" style-hover="padding-left:18px;color:#FF4D00;">
+            <span style="display:flex;flex-direction:column;gap:4px;"><span style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.5;">EMAIL</span><span style="font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:0.02em;"><span class="__cf_email__" data-cfemail="7b1f1e0d550d1a171e150f12150b121c151a0f1e1717123b1c161a121755181416">[email&#160;protected]</span></span></span>
+            <span style="font-size:20px;">&rarr;</span>
+          </a>
+          <a href="#" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:22px 4px;text-decoration:none;color:#ECEAE3;border-bottom:1px solid rgba(236,234,227,0.18);transition:padding 0.18s,color 0.18s;" style-hover="padding-left:18px;color:#FF4D00;">
+            <span style="display:flex;flex-direction:column;gap:4px;"><span style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.5;">LINKEDIN</span><span style="font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:0.02em;">Valent&iacute;n Pignatelli</span></span>
+            <span style="font-size:20px;">&#8599;</span>
+          </a>
+          <a href="#" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:22px 4px;text-decoration:none;color:#ECEAE3;border-bottom:1px solid rgba(236,234,227,0.18);transition:padding 0.18s,color 0.18s;" style-hover="padding-left:18px;color:#FF4D00;">
+            <span style="display:flex;flex-direction:column;gap:4px;"><span style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.5;">GITHUB</span><span style="font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:0.02em;">@valentinpignatelli</span></span>
+            <span style="font-size:20px;">&#8599;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- giant footer wordmark -->
+      <div style="margin-top:clamp(48px,7vw,96px);overflow:hidden;line-height:0.72;border-top:2px solid rgba(236,234,227,0.18);padding-top:clamp(20px,3vw,40px);">
+        <div style="font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-weight:900;font-variation-settings:'wght' 900,'wdth' 125;font-size:clamp(56px,17.5vw,290px);letter-spacing:-0.04em;color:#FF4D00;white-space:nowrap;">PIGNATELLI</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px 28px;padding:22px 0 clamp(30px,4vw,48px);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(236,234,227,0.55);">
+          <span>&copy; 2026 VALENT&Iacute;N PIGNATELLI</span>
+          <span>BUENOS AIRES / ARG</span>
+          <span style="margin-left:auto;">STATUS: OPERATIONAL &mdash; &mdash; &mdash;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  armBox = React.createRef();
+  armCanvas = React.createRef();
+
+  componentDidMount() {
+    this._setup();
+  }
+  componentWillUnmount() {
+    cancelAnimationFrame(this._raf);
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this._ro) this._ro.disconnect();
+  }
+
+  _setup() {
+    const box = this.armBox.current;
+    const canvas = this.armCanvas.current;
+    if (!box || !canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    let W = 0, H = 0, dpr = 1, C = 60, R = 30, cellW = 8, cellH = 12, fontPx = 12;
+
+    const COL = {
+      arm: '#FF6A2B',
+      joint: '#FFEDE2',
+      claw: '#FF8A4C',
+      box: '#F2EFE8',
+      dim: 'rgba(255,109,43,0.15)',
+      hud: 'rgba(236,234,227,0.5)'
+    };
+
+    const resize = () => {
+      const r = box.getBoundingClientRect();
+      W = r.width; H = r.height;
+      if (W < 2 || H < 2) return;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(W * dpr);
+      canvas.height = Math.floor(H * dpr);
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const target = Math.max(7, Math.min(12, Math.round(H / 40)));
+      let cw = target * 0.6, ch = target;
+      C = Math.max(48, Math.min(190, Math.floor(W / cw)));
+      R = Math.max(30, Math.min(96, Math.floor(H / ch)));
+      cellW = W / C;
+      cellH = H / R;
+      fontPx = Math.min(cellH * 0.98, cellW / 0.6);
+    };
+    this._onResize = resize;
+    window.addEventListener('resize', resize);
+    if (window.ResizeObserver) { this._ro = new ResizeObserver(() => resize()); this._ro.observe(box); }
+    resize();
+
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const ss = (t) => (t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t));
+    const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+
+    const start = performance.now();
+
+    const render = () => {
+      const now = performance.now();
+      const time = (now - start) / 1000;
+
+      if (W < 2 || H < 2) { this._raf = requestAnimationFrame(render); return; }
+
+      const N = C * R;
+      const chars = new Array(N).fill(' ');
+      const cols = new Array(N).fill(null);
+      const id = (x, y) => y * C + x;
+      const set = (x, y, ch, c) => {
+        x = Math.round(x); y = Math.round(y);
+        if (x < 0 || y < 0 || x >= C || y >= R) return;
+        chars[id(x, y)] = ch; cols[id(x, y)] = c;
+      };
+      const line = (x0, y0, x1, y1, ch, c) => {
+        const steps = Math.max(1, Math.ceil(Math.hypot(x1 - x0, y1 - y0)));
+        for (let i = 0; i <= steps; i++) {
+          const t = i / steps;
+          set(lerp(x0, x1, t), lerp(y0, y1, t), ch, c);
+        }
+      };
+      const lineAuto = (x0, y0, x1, y1, c) => {
+        const dx = x1 - x0, dy = y1 - y0;
+        const m = Math.abs(dy) / (Math.abs(dx) + 1e-6);
+        let ch = '=';
+        if (m < 0.45) ch = '=';
+        else if (m > 2.4) ch = '|';
+        else ch = (dy * dx < 0) ? '/' : '\\';
+        line(x0, y0, x1, y1, ch, c);
+      };
+
+      // ===== mechanical draw helpers =====
+      const unit = (ax, ay, bx, by) => { const dx = bx - ax, dy = by - ay, l = Math.hypot(dx, dy) || 1; return { x: dx / l, y: dy / l, l }; };
+      // capsule housing outline along p0->p1 with half-width w
+      const housing = (x0, y0, x1, y1, w, edgeC, detail) => {
+        const u = unit(x0, y0, x1, y1); const nx = -u.y, ny = u.x;
+        lineAuto(x0 + nx * w, y0 + ny * w, x1 + nx * w, y1 + ny * w, edgeC);
+        lineAuto(x0 - nx * w, y0 - ny * w, x1 - nx * w, y1 - ny * w, edgeC);
+        lineAuto(x0 + nx * w, y0 + ny * w, x0 - nx * w, y0 - ny * w, edgeC);
+        lineAuto(x1 + nx * w, y1 + ny * w, x1 - nx * w, y1 - ny * w, edgeC);
+        if (detail) {
+          const steps = Math.max(3, Math.round(u.l));
+          for (let i = 2; i < steps - 1; i += 2) { const t = i / steps; set(x0 + u.x * u.l * t, y0 + u.y * u.l * t, '.', COL.dim); }
+          set(x0 + u.x * 1.6 + nx * w * 0.55, y0 + u.y * 1.6 + ny * w * 0.55, 'o', edgeC);
+          set(x0 + u.x * 1.6 - nx * w * 0.55, y0 + u.y * 1.6 - ny * w * 0.55, 'o', edgeC);
+          set(x1 - u.x * 1.6 + nx * w * 0.55, y1 - u.y * 1.6 + ny * w * 0.55, 'o', edgeC);
+          set(x1 - u.x * 1.6 - nx * w * 0.55, y1 - u.y * 1.6 - ny * w * 0.55, 'o', edgeC);
+        }
+      };
+      // gear / rotary joint
+      const gear = (cx, cy, r, ringC, hubC) => {
+        const st = Math.max(12, Math.round(r * 7));
+        for (let i = 0; i < st; i++) { const a = i / st * Math.PI * 2; set(cx + Math.cos(a) * r, cy + Math.sin(a) * r, 'o', ringC); }
+        for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2; set(cx + Math.cos(a) * (r + 0.9), cy + Math.sin(a) * (r + 0.9), '+', ringC); }
+        const ir = Math.max(1, r * 0.42); const ist = Math.max(6, Math.round(ir * 6));
+        for (let i = 0; i < ist; i++) { const a = i / ist * Math.PI * 2; set(cx + Math.cos(a) * ir, cy + Math.sin(a) * ir, 'o', hubC); }
+        set(cx, cy, '@', hubC);
+      };
+      // parallel-jaw gripper at wrist, oriented along (ux,uy)
+      const gripper = (wx, wy, ux, uy, op) => {
+        const nx = -uy, ny = ux;
+        const pw = Math.max(1.4, R * 0.034);
+        const palmExt = R * 0.05 + 1.5;
+        const fl = Math.max(3, R * 0.105);
+        const px = wx + ux * palmExt, py = wy + uy * palmExt;
+        housing(wx - ux * 1.4, wy - uy * 1.4, px, py, pw, COL.claw, true);
+        const gap = lerp(0.9, Math.max(2.4, R * 0.075), op);
+        const aB = { x: px + nx * gap, y: py + ny * gap };
+        const bB = { x: px - nx * gap, y: py - ny * gap };
+        lineAuto(aB.x, aB.y, bB.x, bB.y, COL.claw);
+        const aT = { x: aB.x + ux * fl, y: aB.y + uy * fl };
+        const bT = { x: bB.x + ux * fl, y: bB.y + uy * fl };
+        housing(aB.x, aB.y, aT.x, aT.y, 0.9, COL.claw, false);
+        housing(bB.x, bB.y, bT.x, bT.y, 0.9, COL.claw, false);
+        // inward gripping pads
+        lineAuto(aT.x, aT.y, aT.x - nx * (gap * 0.55), aT.y - ny * (gap * 0.55), COL.claw);
+        lineAuto(bT.x, bT.y, bT.x + nx * (gap * 0.55), bT.y + ny * (gap * 0.55), COL.claw);
+        set(aB.x, aB.y, 'O', COL.joint);
+        set(bB.x, bB.y, 'O', COL.joint);
+        return { px, py, fl };
+      };
+      // shipping crate
+      const crate = (cx, cy, c) => {
+        const w = 2;
+        for (let x = -w; x <= w; x++) { set(cx + x, cy - w, '=', c); set(cx + x, cy + w, '=', c); }
+        for (let y = -w; y <= w; y++) { set(cx - w, cy + y, '|', c); set(cx + w, cy + y, '|', c); }
+        set(cx - w, cy - w, '+', c); set(cx + w, cy - w, '+', c); set(cx - w, cy + w, '+', c); set(cx + w, cy + w, '+', c);
+        for (let i = -w + 1; i <= w - 1; i++) { set(cx + i, cy + i, '\\', COL.dim); set(cx + i, cy - i, '/', COL.dim); }
+      };
+
+      // background dot field
+      for (let y = 0; y < R; y++) {
+        for (let x = 0; x < C; x++) {
+          if (((x * 11 + y * 17) % 23) === 0) { chars[id(x, y)] = '.'; cols[id(x, y)] = COL.dim; }
+        }
+      }
+
+      // ===== geometry / kinematics (grid coords, y down) =====
+      const S = { x: C * 0.30, y: R * 0.62 };   // shoulder pivot
+      const U = R * 0.34, F = R * 0.30;
+      const pick = { x: C * 0.80, y: R * 0.74 };
+      const drop = { x: C * 0.30, y: R * 0.34 };
+      const hover = R * 0.16;
+      const pickHi = { x: pick.x, y: pick.y - hover };
+      const dropHi = { x: drop.x, y: drop.y - hover };
+      const armW = Math.max(1.6, R * 0.044);
+
+      const P = 6.6;
+      const ph = (time % P) / P;
+      let E = { x: 0, y: 0 }, grab = 0, open = 1;
+      if (ph < 0.16) { const t = ss(ph / 0.16); E.x = pickHi.x; E.y = lerp(pickHi.y, pick.y, t); open = 1; grab = 0; }
+      else if (ph < 0.27) { const t = ss((ph - 0.16) / 0.11); E.x = pick.x; E.y = pick.y; open = 1 - t; grab = 0; }
+      else if (ph < 0.50) { const t = ss((ph - 0.27) / 0.23); E.x = lerp(pick.x, drop.x, t); E.y = lerp(pick.y, drop.y, t) - Math.sin(t * Math.PI) * hover * 1.5; open = 0; grab = 1; }
+      else if (ph < 0.61) { const t = ss((ph - 0.50) / 0.11); E.x = drop.x; E.y = drop.y; open = t; grab = 1 - t; }
+      else if (ph < 0.80) { const t = ss((ph - 0.61) / 0.19); E.x = drop.x; E.y = lerp(drop.y, dropHi.y, t); open = 1; grab = 0; }
+      else { const t = ss((ph - 0.80) / 0.20); E.x = lerp(dropHi.x, pickHi.x, t); E.y = lerp(dropHi.y, pickHi.y, t); open = 1; grab = 0; }
+      E.y += Math.sin(time * 1.8) * 0.22;
+
+      // two-link IK (base = shoulder S)
+      let dxk = E.x - S.x, dyk = E.y - S.y;
+      let d = Math.hypot(dxk, dyk);
+      d = clamp(d, Math.abs(U - F) + 0.6, U + F - 0.6);
+      const phi = Math.atan2(dyk, dxk);
+      const cosB = clamp((d * d + U * U - F * F) / (2 * U * d), -1, 1);
+      const beta = Math.acos(cosB);
+      let a1 = phi - beta;
+      let elbow = { x: S.x + U * Math.cos(a1), y: S.y + U * Math.sin(a1) };
+      if (elbow.y > S.y - 0.4) { a1 = phi + beta; elbow = { x: S.x + U * Math.cos(a1), y: S.y + U * Math.sin(a1) }; }
+      const wrist = { x: E.x, y: E.y };
+      const gd = unit(elbow.x, elbow.y, wrist.x, wrist.y);
+
+      // ===== draw : base assembly =====
+      const fy = R * 0.93;
+      for (let x = Math.round(pick.x) - 7; x <= Math.round(pick.x) + 7; x++) set(x, pick.y + 6, '_', COL.dim); // work surface
+      housing(S.x - R * 0.11, fy, S.x + R * 0.11, fy, R * 0.028, COL.arm, false); // wide mounting flange
+      set(S.x - R * 0.085, fy, 'o', COL.joint); set(S.x + R * 0.085, fy, 'o', COL.joint); // anchor bolts
+      housing(S.x, fy - R * 0.028, S.x, S.y, armW * 1.15, COL.arm, true); // turret column
+
+      // upper arm + elbow
+      housing(S.x, S.y, elbow.x, elbow.y, armW, COL.arm, true);
+      gear(S.x, S.y, armW + 1.3, COL.arm, COL.joint);   // shoulder
+      // forearm
+      housing(elbow.x, elbow.y, wrist.x, wrist.y, armW * 0.85, COL.arm, true);
+      gear(elbow.x, elbow.y, armW + 0.6, COL.arm, COL.joint);  // elbow
+      // wrist + gripper
+      gear(wrist.x, wrist.y, armW * 0.7 + 0.6, COL.claw, COL.joint);
+      const gr = gripper(wrist.x, wrist.y, gd.x, gd.y, open);
+
+      // payload crate
+      const boxAt = grab > 0.5
+        ? { x: wrist.x + gd.x * (gr.fl * 0.6 + R * 0.05 + 1.5), y: wrist.y + gd.y * (gr.fl * 0.6 + R * 0.05 + 1.5) }
+        : { x: pick.x, y: pick.y + 4 };
+      crate(Math.round(boxAt.x), Math.round(boxAt.y), COL.box);
+
+      // hud cursor
+      if (Math.floor(time * 2) % 2 === 0) set(C - 2, 2, '_', COL.hud);
+
+      // paint
+      ctx.clearRect(0, 0, W, H);
+      ctx.font = fontPx + "px 'IBM Plex Mono', ui-monospace, monospace";
+      ctx.textBaseline = 'top';
+      for (let y = 0; y < R; y++) {
+        for (let x = 0; x < C; x++) {
+          const ch = chars[id(x, y)];
+          if (ch === ' ' || ch === undefined) continue;
+          ctx.fillStyle = cols[id(x, y)] || COL.arm;
+          ctx.fillText(ch, x * cellW, y * cellH);
+        }
+      }
+
+      this._raf = requestAnimationFrame(render);
+    };
+    this._raf = requestAnimationFrame(render);
+  }
+
+  renderVals() {
+    return { armBox: this.armBox, armCanvas: this.armCanvas };
+  }
+}
+</script>
+</body>
+</html>
