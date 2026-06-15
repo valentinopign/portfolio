@@ -1,0 +1,42 @@
+---
+const rows = [
+  { n: "01", t: "Señal", d: "Detecto un problema vertical real y costoso.", tail: "[ TAREA RECIBIDA ] [ CONTEXTO CARGADO ]" },
+  { n: "02", t: "Contexto", d: "Modelo el dominio y mapeo el flujo de datos.", tail: "[ INDEXANDO ] [ DEPENDENCIAS MAPEADAS ]" },
+  { n: "03", t: "Ejecución", d: "Construyo el loop agéntico: backend, IA y frontend.", tail: "[ BUILD ] [ API + UI ]" },
+  { n: "04", t: "Validación", d: "Pruebo contra casos reales y audito resultados.", tail: "[ TEST PASS ] [ AUDITED ]" },
+  { n: "05", t: "Deploy", d: "Producción + comercialización. Clientes reales.", tail: "[ ENV: PRODUCTION ] [ LIVE ]", hot: true },
+];
+---
+<section class="bg-bone text-ink px-[clamp(20px,5vw,72px)] py-[clamp(56px,8vw,120px)]">
+  <div class="max-w-[1320px] mx-auto">
+    <div class="flex flex-wrap items-baseline gap-4 mb-[clamp(8px,2vw,20px)]">
+      <span class="text-[12px] tracking-[0.22em] font-bold uppercase text-flame">02</span>
+      <span class="marker-line bg-ink"></span>
+      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">CÓMO_CONSTRUYO</span>
+    </div>
+    <h2 class="mt-0 mb-[clamp(28px,4vw,48px)] font-display font-black [font-variation-settings:'wght'_900,'wdth'_122] text-[clamp(30px,5vw,72px)] leading-[0.9] tracking-[-0.025em] uppercase">
+      PIPELINE / 0 → PROD
+    </h2>
+
+    <div class="border-t-2 border-ink">
+      {rows.map((r) => (
+        <div class:list={[
+          "grid grid-cols-[clamp(56px,8vw,110px)_minmax(0,1.4fr)_minmax(0,1.6fr)] gap-x-[clamp(12px,3vw,40px)] items-center py-[clamp(18px,2.4vw,30px)]",
+          r.hot ? "border-b-2 border-ink" : "border-b border-[rgba(20,18,16,0.18)]",
+        ]}>
+          <span class:list={[
+            "font-display font-black [font-variation-settings:'wght'_900,'wdth'_70] text-[clamp(40px,6vw,92px)] leading-[0.8]",
+            r.hot && "text-flame",
+          ]}>{r.n}</span>
+          <span class:list={[
+            "font-display font-extrabold [font-variation-settings:'wght'_800,'wdth'_118] text-[clamp(18px,2.4vw,34px)] tracking-[-0.01em] uppercase",
+            r.hot && "text-flame",
+          ]}>{r.t}</span>
+          <span class="text-[clamp(11px,1.3vw,14px)] leading-[1.6] tracking-[0.04em]">
+            {r.d} <span class="text-flame">{r.tail}</span>
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
