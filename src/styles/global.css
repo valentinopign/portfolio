@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #141210;
+  --color-flame: #FF4D00;
+  --color-bone: #ECEAE3;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--color-flame); color: var(--color-ink); }
+}
+
+@keyframes vpblink { 0%, 48% { opacity: 1; } 49%, 100% { opacity: 0; } }
+@keyframes vpmarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+@layer components {
+  /* repeated "NN ───── LABEL" section marker rule */
+  .marker-line { flex: 1; height: 2px; min-width: 40px; }
+  /* spec / info cells used in About + Projects */
+  .label-eyebrow {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.55;
+  }
+}
