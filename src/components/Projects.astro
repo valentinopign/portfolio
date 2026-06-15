@@ -1,0 +1,55 @@
+---
+const tags = ["Python", "Flask", "Claude API", "Supabase", "Next.js", "Three.js"];
+const specs = [
+  { k: "DOMINIO", v: "LEGAL / NOTARIAL", hot: false },
+  { k: "CAPA IA", v: "AGENTIC LOOPS", hot: false },
+  { k: "ESTADO", v: "EN PRODUCCIÓN", hot: true },
+];
+---
+<section id="proyectos" class="bg-flame text-ink px-[clamp(20px,5vw,72px)] py-[clamp(56px,8vw,120px)]">
+  <div class="max-w-[1320px] mx-auto">
+    <div class="flex flex-wrap items-baseline gap-4 mb-[clamp(36px,5vw,60px)]">
+      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">04</span>
+      <span class="marker-line bg-ink"></span>
+      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">PROYECTOS</span>
+    </div>
+
+    <div class="flex flex-wrap border-2 border-ink bg-bone">
+      <!-- vertical spine -->
+      <div class="bg-ink text-flame flex items-center justify-center px-2.5 py-[18px] [writing-mode:vertical-rl] rotate-180 font-display font-black [font-variation-settings:'wght'_900,'wdth'_118] text-[clamp(13px,1.4vw,18px)] tracking-[0.16em] uppercase">
+        PRODUCTO 01 — EN PRODUCCIÓN
+      </div>
+
+      <div class="flex-[1_1_420px] min-w-[280px] p-[clamp(26px,3.5vw,48px)] text-ink">
+        <div class="group flex flex-wrap items-center gap-3.5">
+          <h3 class="m-0 font-display font-black [font-variation-settings:'wght'_900,'wdth'_122] text-[clamp(40px,6vw,90px)] leading-[0.85] tracking-[-0.03em] uppercase">
+            Escriban<span class="text-flame">IA</span>
+          </h3>
+          <a href="https://escriban-ia.com.ar" target="_blank" rel="noopener"
+             class="no-underline text-ink text-[clamp(22px,3vw,40px)] leading-none inline-block transition-transform duration-[180ms] group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">↗</a>
+        </div>
+        <p class="mt-[18px] mb-0 text-[clamp(12px,1.4vw,15px)] tracking-[0.12em] uppercase font-semibold text-flame">
+          SaaS vertical con IA para escribanías argentinas
+        </p>
+        <p class="mt-4 mb-7 text-[clamp(13px,1.5vw,16px)] leading-[1.65] max-w-[640px]">
+          Producto en producción que automatiza la recolección de datos, la auditoría de documentos societarios y la consulta al Boletín Oficial. Utiliza loops agénticos sobre Claude para resolver tareas reales de oficina.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mb-[30px]">
+          {tags.map((t) => (
+            <span class="border-[1.5px] border-ink px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase font-medium">{t}</span>
+          ))}
+        </div>
+
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] border-t-2 border-l-2 border-ink">
+          {specs.map((s) => (
+            <div class="border-r-2 border-b-2 border-ink px-4 py-[13px]">
+              <div class="label-eyebrow">{s.k}</div>
+              <div class:list={["font-semibold mt-[5px] text-[13px]", s.hot && "text-flame"]}>{s.v}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
