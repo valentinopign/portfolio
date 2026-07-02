@@ -3,3 +3,8 @@ dist/
 .astro/
 .DS_Store
 *.log
+
+# working files / scratch
+screenshot*.png
+ascii-art*
+
