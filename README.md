@@ -2,7 +2,7 @@
 
 Personal portfolio with a neo-industrial design system. Built with Astro and Tailwind CSS, shipped as a fully static site.
 
-![Portfolio hero](public/og.png)
+![Portfolio hero](public/og.png?v=2)
 
 **Live:** _coming soon_ · **Español:** `/es/`
 
