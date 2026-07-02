@@ -1,18 +1,31 @@
 ---
-const rows = [
+interface Props {
+  lang?: "es" | "en";
+}
+const { lang = "es" } = Astro.props;
+const rowsEs = [
   { n: "01", t: "Señal", d: "Detecto un problema vertical real y costoso.", tail: "[ TAREA RECIBIDA ] [ CONTEXTO CARGADO ]" },
   { n: "02", t: "Contexto", d: "Modelo el dominio y mapeo el flujo de datos.", tail: "[ INDEXANDO ] [ DEPENDENCIAS MAPEADAS ]" },
   { n: "03", t: "Ejecución", d: "Construyo el loop agéntico: backend, IA y frontend.", tail: "[ BUILD ] [ API + UI ]" },
   { n: "04", t: "Validación", d: "Pruebo contra casos reales y audito resultados.", tail: "[ TEST PASS ] [ AUDITED ]" },
-  { n: "05", t: "Deploy", d: "Producción + comercialización. Clientes reales.", tail: "[ ENV: PRODUCTION ] [ LIVE ]", hot: true },
+  { n: "05", t: "Deploy", d: "Producción + comercialización. Usuarios reales.", tail: "[ ENV: PRODUCTION ] [ LIVE ]", hot: true },
 ];
+const rowsEn = [
+  { n: "01", t: "Signal", d: "I spot a real, costly vertical problem.", tail: "[ TASK RECEIVED ] [ CONTEXT LOADED ]" },
+  { n: "02", t: "Context", d: "I model the domain and map the data flow.", tail: "[ INDEXING ] [ DEPENDENCIES MAPPED ]" },
+  { n: "03", t: "Execution", d: "I build the agentic loop: backend, AI, and frontend.", tail: "[ BUILD ] [ API + UI ]" },
+  { n: "04", t: "Validation", d: "I test against real cases and audit results.", tail: "[ TEST PASS ] [ AUDITED ]" },
+  { n: "05", t: "Deploy", d: "Production + commercialization. Real users.", tail: "[ ENV: PRODUCTION ] [ LIVE ]", hot: true },
+];
+const rows = lang === "en" ? rowsEn : rowsEs;
+const eyebrow = lang === "en" ? "HOW_I_BUILD" : "CÓMO_CONSTRUYO";
 ---
-<section class="bg-bone text-ink px-[clamp(20px,5vw,72px)] py-[clamp(56px,8vw,120px)]">
+<section id="proceso" class="bg-bone text-ink px-[clamp(20px,5vw,72px)] py-[clamp(56px,8vw,120px)]">
   <div class="max-w-[1320px] mx-auto">
     <div class="flex flex-wrap items-baseline gap-4 mb-[clamp(8px,2vw,20px)]">
       <span class="text-[12px] tracking-[0.22em] font-bold uppercase text-flame">02</span>
       <span class="marker-line bg-ink"></span>
-      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">CÓMO_CONSTRUYO</span>
+      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">{eyebrow}</span>
     </div>
     <h2 class="mt-0 mb-[clamp(28px,4vw,48px)] font-display font-black [font-variation-settings:'wght'_900,'wdth'_122] text-[clamp(30px,5vw,72px)] leading-[0.9] tracking-[-0.025em] uppercase">
       PIPELINE / 0 → PROD

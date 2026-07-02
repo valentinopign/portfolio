@@ -1,24 +1,39 @@
 ---
-const rows = [
+interface Props {
+  lang?: "es" | "en";
+}
+const { lang = "es" } = Astro.props;
+const rowsEs = [
   { layer: "Lenguajes", tools: "Python · JavaScript · TypeScript", status: "CORE" },
   { layer: "Frameworks", tools: "Flask · Next.js · React", status: "DAILY" },
   { layer: "IA", tools: "Claude API · Loops agénticos · Prompt eng.", status: "FOCUS" },
   { layer: "Data / Infra", tools: "Supabase · PostgreSQL · Deployment", status: "READY" },
   { layer: "UI / 3D", tools: "Three.js · Tailwind · Canvas / WebGL", status: "CRAFT", last: true },
 ];
+const rowsEn = [
+  { layer: "Languages", tools: "Python · JavaScript · TypeScript", status: "CORE" },
+  { layer: "Frameworks", tools: "Flask · Next.js · React", status: "DAILY" },
+  { layer: "AI", tools: "Claude API · Agentic loops · Prompt eng.", status: "FOCUS" },
+  { layer: "Data / Infra", tools: "Supabase · PostgreSQL · Deployment", status: "READY" },
+  { layer: "UI / 3D", tools: "Three.js · Tailwind · Canvas / WebGL", status: "CRAFT", last: true },
+];
+const rows = lang === "en" ? rowsEn : rowsEs;
+const eyebrow = lang === "en" ? "TECH_STACK" : "STACK_TÉCNICO";
+const layerHeader = lang === "en" ? "LAYER" : "CAPA";
+const toolsHeader = lang === "en" ? "TOOLS" : "HERRAMIENTAS";
 ---
-<section class="bg-bone text-ink px-[clamp(20px,5vw,72px)] py-[clamp(56px,8vw,120px)]">
+<section id="stack" class="bg-bone text-ink px-[clamp(20px,5vw,72px)] py-[clamp(56px,8vw,120px)]">
   <div class="max-w-[1320px] mx-auto">
     <div class="flex flex-wrap items-baseline gap-4 mb-[clamp(24px,4vw,44px)]">
       <span class="text-[12px] tracking-[0.22em] font-bold uppercase text-flame">03</span>
       <span class="marker-line bg-ink"></span>
-      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">STACK_TÉCNICO</span>
+      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">{eyebrow}</span>
     </div>
 
     <div class="border-2 border-ink">
       <div class="grid grid-cols-[minmax(120px,1fr)_minmax(0,2fr)_minmax(90px,0.9fr)] bg-ink text-bone text-[11px] tracking-[0.18em] uppercase font-semibold">
-        <span class="px-[18px] py-[13px]">CAPA</span>
-        <span class="px-[18px] py-[13px]">HERRAMIENTAS</span>
+        <span class="px-[18px] py-[13px]">{layerHeader}</span>
+        <span class="px-[18px] py-[13px]">{toolsHeader}</span>
         <span class="px-[18px] py-[13px] text-right">STATUS</span>
       </div>
       {rows.map((r) => (

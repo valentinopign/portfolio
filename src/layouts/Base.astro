@@ -2,20 +2,32 @@
 interface Props {
   title?: string;
   description?: string;
+  lang?: "es" | "en";
 }
 const {
-  title = "Valentín Pignatelli — AI Product Developer",
-  description = "AI Product Developer — de cero a producción. Construyo productos completos con IA: backend, frontend, deployment y comercialización.",
+  title = "Valentín Pignatelli — Full Stack & AI Product Developer",
+  description = "Full Stack & AI Product Developer — Open to Work. Construyo productos completos: arquitectura backend, frontend y automatizaciones agénticas.",
+  lang = "es",
 } = Astro.props;
+const ogImage = Astro.site ? new URL("/og.png", Astro.site).href : "/og.png";
 import "../styles/global.css";
 ---
 <!DOCTYPE html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

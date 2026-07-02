@@ -5,19 +5,23 @@ import Hero from "../components/Hero.astro";
 import Marquee from "../components/Marquee.astro";
 import About from "../components/About.astro";
 import Process from "../components/Process.astro";
-import AgenticLoop from "../components/AgenticLoop.astro";
 import Stack from "../components/Stack.astro";
 import Projects from "../components/Projects.astro";
 import Contact from "../components/Contact.astro";
 ---
-<Base>
-  <StatusBar />
-  <Hero />
-  <Marquee />
-  <About />
-  <Process />
-  <AgenticLoop />
-  <Stack />
-  <Projects />
-  <Contact />
+<Base
+  lang="en"
+  title="Valentín Pignatelli — Full Stack & AI Product Developer"
+  description="Full Stack & AI Product Developer — Open to Work. I build complete products: backend architecture, frontend, and agentic automations."
+>
+  <div class="min-h-dvh flex flex-col relative z-10 -mb-px">
+    <StatusBar lang="en" />
+    <Hero lang="en" />
+    <Marquee />
+  </div>
+  <About lang="en" />
+  <Process lang="en" />
+  <Stack lang="en" />
+  <Projects lang="en" />
+  <Contact lang="en" />
 </Base>

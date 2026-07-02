@@ -1,0 +1,27 @@
+---
+import Base from "../../layouts/Base.astro";
+import StatusBar from "../../components/StatusBar.astro";
+import Hero from "../../components/Hero.astro";
+import Marquee from "../../components/Marquee.astro";
+import About from "../../components/About.astro";
+import Process from "../../components/Process.astro";
+import Stack from "../../components/Stack.astro";
+import Projects from "../../components/Projects.astro";
+import Contact from "../../components/Contact.astro";
+---
+<Base
+  lang="es"
+  title="Valentín Pignatelli — Full Stack & AI Product Developer"
+  description="Full Stack & AI Product Developer — Open to Work. Construyo productos completos: arquitectura backend, frontend y automatizaciones agénticas."
+>
+  <div class="min-h-dvh flex flex-col relative z-10 -mb-px">
+    <StatusBar lang="es" />
+    <Hero lang="es" />
+    <Marquee />
+  </div>
+  <About lang="es" />
+  <Process lang="es" />
+  <Stack lang="es" />
+  <Projects lang="es" />
+  <Contact lang="es" />
+</Base>

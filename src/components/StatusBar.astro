@@ -1,18 +1,27 @@
 ---
-const topItems = ["IDE › TERMINAL › SLACK", "——", "BUENOS AIRES / ARG", "——", "STATE: AVAILABLE 24/7"];
-const tags = ["[ AI PRODUCT DEV ]", "[ 0 → PROD ]", "[ OPEN TO WORK ]"];
+interface Props {
+  lang?: "es" | "en";
+}
+const { lang = "es" } = Astro.props;
+const topItems = ["IDE › TERMINAL › SLACK › LINEAR", "——", "BUENOS AIRES / ARG", "——", "TIMEZONE: GMT−3"];
+const tags = ["[ FULL STACK & AI PRODUCT DEV ]", "[ 0 → PROD ]", "[ OPEN TO WORK ]"];
+const toggle = lang === "en" ? { label: "ES", href: "/es/" } : { label: "EN", href: "/" };
 ---
 <div class="bg-flame text-ink border-t-[9px] border-b-[3px] border-ink [box-shadow:0_-16px_0_-13px_#141210,0_-24px_0_-21px_#141210]">
   <div class="max-w-[1320px] mx-auto py-[14px] px-[clamp(20px,5vw,72px)]">
     <div class="flex flex-wrap gap-x-[28px] gap-y-[10px] text-[11px] tracking-[0.16em] font-medium uppercase opacity-90">
       {topItems.map((t) => <span>{t}</span>)}
     </div>
-    <div class="flex flex-wrap gap-x-[28px] gap-y-[14px] items-center mt-[10px] font-display font-extrabold [font-variation-settings:'wght'_800,'wdth'_118] text-[clamp(18px,2.6vw,30px)] tracking-[-0.01em]">
+    <div class="flex flex-wrap gap-x-[22px] gap-y-[12px] items-center mt-[10px] font-display font-extrabold [font-variation-settings:'wght'_800,'wdth'_118] text-[clamp(15px,1.8vw,24px)] tracking-[-0.01em]">
       <span class="whitespace-nowrap">{tags[0]}</span>
       <span class="font-mono font-bold text-[0.7em]">::</span>
       <span class="whitespace-nowrap">{tags[1]}</span>
       <span class="font-mono font-bold text-[0.7em]">::</span>
       <span class="whitespace-nowrap">{tags[2]}</span>
+      <a href={toggle.href}
+         class="ml-auto border-2 border-ink px-4 py-1.5 font-mono font-bold text-[13px] tracking-[0.18em] uppercase no-underline text-ink transition-colors duration-[180ms] hover:bg-ink hover:text-flame">
+        {toggle.label}
+      </a>
     </div>
   </div>
 </div>

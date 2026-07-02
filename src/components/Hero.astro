@@ -1,38 +1,63 @@
 ---
 import RoboticArm from "./RoboticArm.astro";
-const readout = ["CORE_SYS: ONLINE", "STACK: MATURE", "MODEL: CLAUDE", "FOCUS: AGENTIC LOOPS"];
+interface Props {
+  lang?: "es" | "en";
+}
+const { lang = "es" } = Astro.props;
+const readout = ["CORE_SYS: ONLINE", "STACK: PY / TS / NEXT", "EXP: 1YR+ / SHIPPING", "FOCUS: AI AUTOMATION"];
+const copy = {
+  es: {
+    loc: "[ LOC: −34.6037° / −58.3816° · BUENOS AIRES ]",
+    tagline: "FULL STACK & AI PRODUCT DEVELOPER",
+    body: "Construyo aplicaciones web completas y robustas, integrando inteligencia artificial y automatizaciones para resolver problemas reales de extremo a extremo.",
+    projects: "Ver Proyectos →",
+    cv: "CV ↓",
+  },
+  en: {
+    loc: "[ LOC: −34.6037° / −58.3816° · BUENOS AIRES ]",
+    tagline: "FULL STACK & AI PRODUCT DEVELOPER",
+    body: "I build complete, robust web applications, integrating artificial intelligence and automations to solve real problems end to end.",
+    projects: "View Projects →",
+    cv: "CV ↓",
+  },
+};
+const t = lang === "en" ? copy.en : copy.es;
 ---
-<section class="bg-flame text-ink px-[clamp(20px,5vw,72px)] pt-[clamp(40px,6vw,84px)] pb-[clamp(28px,4vw,56px)]">
+<section id="inicio" class="bg-flame text-ink px-[clamp(20px,5vw,72px)] pt-[clamp(40px,6vw,84px)] pb-[clamp(28px,4vw,56px)] flex-1 flex flex-col justify-center">
   <div class="max-w-[1320px] mx-auto">
     <div class="flex flex-wrap gap-[clamp(32px,4vw,64px)] items-stretch">
       <!-- left: identity -->
-      <div class="flex-[2_1_460px] min-w-[300px] flex flex-col justify-center">
-        <div class="flex items-center gap-3 text-[11px] tracking-[0.22em] uppercase font-medium mb-[clamp(20px,3vw,34px)]">
+      <div class="flex-[2_1_460px] min-w-0 flex flex-col justify-center">
+        <div class="flex flex-wrap items-center gap-3 text-[11px] tracking-[0.22em] uppercase font-medium mb-[clamp(20px,3vw,34px)]">
           <span class="w-[9px] h-[9px] bg-ink inline-block"></span>
-          <span>[ LOC: −34.6037° / −58.3816° · BUENOS AIRES ]</span>
+          <span class="whitespace-nowrap">{t.loc}</span>
         </div>
 
-        <h1 class="m-0 font-display font-black [font-variation-settings:'wght'_900,'wdth'_125] text-[clamp(52px,9vw,148px)] leading-[0.84] tracking-[-0.03em] uppercase">
+        <h1 class="m-0 font-display font-black [font-variation-settings:'wght'_900,'wdth'_100] text-[clamp(32px,4.4vw,68px)] leading-[0.9] tracking-[-0.02em] uppercase whitespace-nowrap">
           VALENTÍN<br />PIGNATELLI
         </h1>
 
         <div class="mt-[clamp(22px,3vw,34px)] max-w-[560px] border-l-[3px] border-ink pl-5">
           <p class="m-0 text-[clamp(13px,1.5vw,16px)] tracking-[0.14em] uppercase font-semibold">
-            AI PRODUCT DEVELOPER — DE CERO A PRODUCCIÓN
+            {t.tagline}
           </p>
           <p class="mt-3.5 mb-0 text-[clamp(14px,1.6vw,17px)] leading-[1.55] font-normal">
-            Construyo productos completos con IA: arquitectura backend, frontend, deployment y comercialización. Diseño loops agénticos que resuelven problemas verticales reales.
+            {t.body}
           </p>
         </div>
 
-        <div class="flex flex-wrap gap-3.5 mt-[clamp(26px,3.5vw,40px)]">
+        <div class="flex flex-wrap gap-2.5 mt-[clamp(26px,3.5vw,40px)]">
           <a href="#proyectos"
-             class="bg-ink text-bone no-underline px-[30px] py-4 text-[12px] tracking-[0.18em] uppercase font-semibold border-2 border-ink transition-all duration-[180ms] hover:bg-bone hover:text-ink">
-            Ver Proyectos →
+             class="bg-ink text-bone no-underline px-[clamp(14px,1.6vw,28px)] py-4 text-[12px] tracking-[0.18em] uppercase font-semibold border-2 border-ink transition-all duration-[180ms] hover:bg-bone hover:text-ink">
+            {t.projects}
           </a>
-          <a href="#contacto"
-             class="bg-transparent text-ink no-underline px-[30px] py-4 text-[12px] tracking-[0.18em] uppercase font-semibold border-2 border-ink transition-all duration-[180ms] hover:bg-ink hover:text-bone">
-            Contacto
+          <a href="https://github.com/valentinopign" target="_blank" rel="noopener"
+             class="bg-transparent text-ink no-underline px-[clamp(14px,1.6vw,28px)] py-4 text-[12px] tracking-[0.18em] uppercase font-semibold border-2 border-ink transition-all duration-[180ms] hover:bg-ink hover:text-bone">
+            GitHub ↗
+          </a>
+          <a href="/CV-Valentin-Pignatelli.pdf" download
+             class="bg-transparent text-ink no-underline px-[clamp(14px,1.6vw,28px)] py-4 text-[12px] tracking-[0.18em] uppercase font-semibold border-2 border-ink transition-all duration-[180ms] hover:bg-ink hover:text-bone">
+            {t.cv}
           </a>
         </div>
       </div>

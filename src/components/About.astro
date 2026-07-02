@@ -1,30 +1,60 @@
 ---
-const cells = [
-  { k: "ROLE", v: "AI PRODUCT DEV" },
+interface Props {
+  lang?: "es" | "en";
+}
+const { lang = "es" } = Astro.props;
+const cellsEs = [
+  { k: "FORMACIÓN", v: "ING. INFORMÁTICA — EN CURSO" },
+  { k: "TÉCNICO", v: "ELECTRÓNICA" },
+  { k: "EXP", v: "1 AÑO+ SHIPPING" },
   { k: "BASE", v: "BUENOS AIRES, AR" },
-  { k: "FOCUS", v: "AGENTIC SYSTEMS" },
-  { k: "STATE", v: "SHIPPING" },
+  { k: "MODALIDAD", v: "REMOTO / HÍBRIDO BSAS" },
+  { k: "INGLÉS", v: "B2 CONVERSACIONAL" },
 ];
+const cellsEn = [
+  { k: "DEGREE", v: "COMPUTER ENG. — IN PROGRESS" },
+  { k: "TECHNICIAN", v: "ELECTRONICS" },
+  { k: "EXP", v: "1YR+ SHIPPING" },
+  { k: "BASE", v: "BUENOS AIRES, AR" },
+  { k: "WORK MODE", v: "REMOTE / HYBRID BA" },
+  { k: "ENGLISH", v: "B2 CONVERSATIONAL" },
+];
+const copy = {
+  es: {
+    eyebrow: "SOBRE_MÍ",
+    heading: 'Desarrollador Full Stack con foco en productos con IA. <span class="opacity-50">De la base de datos al deploy.</span>',
+    p1: 'Desarrollo aplicaciones robustas de extremo a extremo: bases de datos sólidas, APIs rápidas, interfaces interactivas e <strong>integraciones con inteligencia artificial</strong> para crear sistemas de automatización eficientes.',
+    p2: "Mi enfoque es construir productos que llegan a producción y a usuarios reales: más de un año construyendo y desplegando software, con un SaaS propio en piloto con clientes. Disponible para roles junior remotos o híbridos en Buenos Aires.",
+    cells: cellsEs,
+  },
+  en: {
+    eyebrow: "ABOUT_ME",
+    heading: 'Full Stack Developer focused on AI products. <span class="opacity-50">From the database to the deploy.</span>',
+    p1: 'I build robust applications end to end: solid databases, fast APIs, interactive interfaces, and <strong>AI integrations</strong> to create efficient automation systems.',
+    p2: "My focus is building products that reach production and real users: over a year building and shipping software, with my own SaaS piloting with clients. Available for remote or hybrid junior roles in Buenos Aires.",
+    cells: cellsEn,
+  },
+};
+const t = lang === "en" ? copy.en : copy.es;
 ---
-<section class="bg-flame text-ink px-[clamp(20px,5vw,72px)] py-[clamp(56px,8vw,120px)]">
+<section id="sobre-mi" class="bg-bone text-ink px-[clamp(20px,5vw,72px)] pt-[clamp(48px,6vw,88px)] pb-[clamp(40px,5vw,72px)]">
   <div class="max-w-[1320px] mx-auto">
-    <div class="flex items-baseline gap-4 mb-[clamp(36px,5vw,64px)]">
-      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">01</span>
+    <div class="flex items-baseline gap-4 mb-[clamp(28px,4vw,48px)]">
+      <span class="text-[12px] tracking-[0.22em] font-bold uppercase text-flame">01</span>
       <span class="marker-line bg-ink"></span>
-      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">SOBRE_MÍ</span>
+      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">{t.eyebrow}</span>
     </div>
     <div class="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-[clamp(32px,5vw,72px)] items-start">
       <div>
-        <h2 class="m-0 font-display font-black [font-variation-settings:'wght'_880,'wdth'_110] text-[clamp(28px,3.6vw,52px)] leading-[0.98] tracking-[-0.02em]">
-          Técnico en Electrónica + Estudiante de Ingeniería Informática. <span class="opacity-50">Autodidacta en desarrollo con IA.</span>
+        <h2 class="m-0 font-display font-black [font-variation-settings:'wght'_880,'wdth'_110] text-[clamp(28px,3.6vw,52px)] leading-[0.98] tracking-[-0.02em]" set:html={t.heading}>
         </h2>
       </div>
       <div class="text-[clamp(14px,1.5vw,16px)] leading-[1.65] font-normal">
-        <p class="mt-0 mb-[18px]">No solo implemento modelos: diseño sistemas agénticos que resuelven problemas verticales específicos, desde la arquitectura hasta el deployment.</p>
-        <p class="mt-0 mb-7">Mi enfoque es construir productos que lleguen a producción — usados por clientes reales — no demos ni pruebas de concepto.</p>
+        <p class="mt-0 mb-[18px]" set:html={t.p1} />
+        <p class="mt-0 mb-7">{t.p2}</p>
         <div class="grid grid-cols-2 gap-px bg-ink border-2 border-ink">
-          {cells.map((c) => (
-            <div class="bg-flame px-4 py-3.5">
+          {t.cells.map((c) => (
+            <div class="bg-bone px-4 py-3.5">
               <div class="label-eyebrow">{c.k}</div>
               <div class="font-semibold mt-1 text-[13px] tracking-[0.04em]">{c.v}</div>
             </div>
