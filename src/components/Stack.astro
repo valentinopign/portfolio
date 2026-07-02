@@ -5,24 +5,26 @@ interface Props {
 const { lang = "es" } = Astro.props;
 const rowsEs = [
   { layer: "Lenguajes", tools: "Python · JavaScript · TypeScript", status: "CORE" },
-  { layer: "Frameworks", tools: "Flask · Next.js · React", status: "DAILY" },
+  { layer: "Frameworks", tools: "Flask · Next.js · React · Astro", status: "DAILY" },
   { layer: "IA", tools: "Claude API · Loops agénticos · Prompt eng.", status: "FOCUS" },
-  { layer: "Data / Infra", tools: "Supabase · PostgreSQL · Deployment", status: "READY" },
-  { layer: "UI / 3D", tools: "Three.js · Tailwind · Canvas / WebGL", status: "CRAFT", last: true },
+  { layer: "Data", tools: "Supabase · PostgreSQL · MongoDB", status: "DAILY" },
+  { layer: "Deploy", tools: "Vercel · Fly.io · Railway · Docker", status: "PROD" },
+  { layer: "UI / 3D", tools: "Three.js · Tailwind · Canvas / WebGL", status: "SIDE", last: true },
 ];
 const rowsEn = [
   { layer: "Languages", tools: "Python · JavaScript · TypeScript", status: "CORE" },
-  { layer: "Frameworks", tools: "Flask · Next.js · React", status: "DAILY" },
+  { layer: "Frameworks", tools: "Flask · Next.js · React · Astro", status: "DAILY" },
   { layer: "AI", tools: "Claude API · Agentic loops · Prompt eng.", status: "FOCUS" },
-  { layer: "Data / Infra", tools: "Supabase · PostgreSQL · Deployment", status: "READY" },
-  { layer: "UI / 3D", tools: "Three.js · Tailwind · Canvas / WebGL", status: "CRAFT", last: true },
+  { layer: "Data", tools: "Supabase · PostgreSQL · MongoDB", status: "DAILY" },
+  { layer: "Deploy", tools: "Vercel · Fly.io · Railway · Docker", status: "PROD" },
+  { layer: "UI / 3D", tools: "Three.js · Tailwind · Canvas / WebGL", status: "SIDE", last: true },
 ];
 const rows = lang === "en" ? rowsEn : rowsEs;
 const eyebrow = lang === "en" ? "TECH_STACK" : "STACK_TÉCNICO";
 const layerHeader = lang === "en" ? "LAYER" : "CAPA";
 const toolsHeader = lang === "en" ? "TOOLS" : "HERRAMIENTAS";
 ---
-<section id="stack" class="bg-bone text-ink px-[clamp(20px,5vw,72px)] py-[clamp(56px,8vw,120px)]">
+<section id="stack" class="bg-bone text-ink px-[clamp(20px,5vw,72px)] pt-[clamp(40px,5vw,72px)] pb-[clamp(48px,6vw,88px)]">
   <div class="max-w-[1320px] mx-auto">
     <div class="flex flex-wrap items-baseline gap-4 mb-[clamp(24px,4vw,44px)]">
       <span class="text-[12px] tracking-[0.22em] font-bold uppercase text-flame">03</span>

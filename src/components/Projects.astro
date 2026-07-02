@@ -191,12 +191,12 @@ const orbitSpecs = t.orbitSpecs;
         </div>
       </div>
 
-      <!-- Right: orbits canvas container -->
+      <!-- Right: conveyor canvas container -->
       <div class="flex-[1_1_340px] min-w-[280px] p-[clamp(26px,3.5vw,48px)] flex flex-col justify-center border-t-2 lg:border-t-0 lg:border-l-2 border-ink bg-bone">
-        <div id="orbits-box" class="relative w-full h-[220px] bg-ink border-2 border-ink overflow-hidden">
-          <canvas id="orbits-canvas" class="absolute inset-0 block"></canvas>
+        <div id="conveyor-box" class="relative w-full h-[300px] bg-ink border-2 border-ink overflow-hidden">
+          <canvas id="conveyor-canvas" class="absolute inset-0 block"></canvas>
           <div class="absolute top-3 left-3.5 right-3.5 flex justify-between text-[10px] tracking-[0.18em] uppercase text-[rgba(236,234,227,0.55)] pointer-events-none">
-            <span>UNIT VP−03 / ORBITS</span>
+            <span>UNIT VP−03 / CONVEYOR</span>
             <span class="text-flame">● SYSTEM RUNNING</span>
           </div>
           <span class="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 border-flame"></span>
@@ -225,14 +225,14 @@ const orbitSpecs = t.orbitSpecs;
 </div>
 
 <script>
-  import { initOrbits } from "../scripts/orbits";
+  import { initConveyor } from "../scripts/conveyor";
 
-  // Orbits
-  const obox = document.getElementById("orbits-box");
-  const ocanvas = document.getElementById("orbits-canvas") as HTMLCanvasElement | null;
-  if (obox && ocanvas) {
-    const ohandle = initOrbits(obox, ocanvas);
-    window.addEventListener("beforeunload", () => ohandle.cleanup());
+  // Conveyor
+  const cbox = document.getElementById("conveyor-box");
+  const ccanvas = document.getElementById("conveyor-canvas") as HTMLCanvasElement | null;
+  if (cbox && ccanvas) {
+    const chandle = initConveyor(cbox, ccanvas);
+    window.addEventListener("beforeunload", () => chandle.cleanup());
   }
 
   // Lightbox

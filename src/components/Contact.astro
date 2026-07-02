@@ -37,6 +37,7 @@ const copy = {
     connect: "Connect",
     ready: "Ready for the<br />next product.",
     build: "Let's build. →",
+    copied: "Email copiado ✓",
   },
   en: {
     exploreLinks: exploreLinksEn,
@@ -47,6 +48,7 @@ const copy = {
     connect: "Connect",
     ready: "Ready for the<br />next product.",
     build: "Let's build. →",
+    copied: "Email copied ✓",
   },
 };
 const t = lang === "en" ? copy.en : copy.es;
@@ -93,7 +95,12 @@ const t = lang === "en" ? copy.en : copy.es;
         <span class="text-[11px] tracking-[0.22em] uppercase font-mono text-ink/55 font-bold">{t.connect}</span>
         <div class="flex flex-col gap-2.5">
           {connectLinks.map((l) => (
-            <a href={l.href} target={l.href.startsWith("mailto:") ? undefined : "_blank"} rel={l.href.startsWith("mailto:") ? undefined : "noopener noreferrer"} class="font-display font-black [font-variation-settings:'wght'_900,'wdth'_115] text-[clamp(26px,4vw,44px)] leading-[0.95] tracking-tight uppercase text-ink no-underline hover:underline hover:underline-offset-[10px] hover:decoration-[3px]">
+            <a href={l.href}
+               target={l.href.startsWith("mailto:") ? undefined : "_blank"}
+               rel={l.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+               data-copy-email={l.href.startsWith("mailto:") ? l.href.replace("mailto:", "") : undefined}
+               data-label={l.href.startsWith("mailto:") ? l.name : undefined}
+               class="font-display font-black [font-variation-settings:'wght'_900,'wdth'_115] text-[clamp(26px,4vw,44px)] leading-[0.95] tracking-tight uppercase text-ink no-underline hover:underline hover:underline-offset-[10px] hover:decoration-[3px]">
               {l.name}
             </a>
           ))}
@@ -103,20 +110,20 @@ const t = lang === "en" ? copy.en : copy.es;
 
     <!-- Bottom Left (Row 2, Col 1): Philosophy & CTA -->
     <div class="lg:col-span-1 border-b-2 lg:border-b-0 lg:border-r-2 border-ink p-[clamp(24px,4vw,36px)] flex flex-col justify-between bg-flame text-ink">
-      <div class="mb-8 text-center">
-        <h3 class="m-0 font-display font-black [font-variation-settings:'wght'_900,'wdth'_115] text-[clamp(26px,3.5vw,36px)] leading-[0.9] tracking-tight uppercase mb-6" set:html={t.ready}>
+      <div class="mb-8">
+        <h3 class="m-0 font-display font-black [font-variation-settings:'wght'_900,'wdth'_115] text-[clamp(26px,3.5vw,36px)] leading-[0.9] tracking-tight uppercase mb-5" set:html={t.ready}>
         </h3>
-        <pre class="m-0 font-mono text-[14px] leading-[1.2] text-ink/80 font-medium text-center" aria-hidden="true">  |
-  |
-  v</pre>
+        <span class="block font-display font-black text-[clamp(32px,4vw,48px)] leading-none text-ink/80" aria-hidden="true">↓</span>
       </div>
-      <a href="mailto:dev.valentinpignatelli@gmail.com" class="group relative bg-ink text-bone font-mono text-[11px] tracking-[0.22em] uppercase py-4 px-6 text-center font-bold block transition-colors duration-180 hover:bg-bone hover:text-ink no-underline select-none">
+      <button type="button" id="copy-email"
+              data-email="dev.valentinpignatelli@gmail.com" data-label={t.build} data-copied={t.copied}
+              class="group relative w-full bg-ink text-bone font-mono text-[11px] tracking-[0.22em] uppercase py-4 px-6 text-center font-bold block transition-colors duration-180 hover:bg-bone hover:text-ink cursor-pointer border-0 select-none">
         <span class="absolute top-1 left-1 w-1.5 h-1.5 bg-bone transition-colors duration-180 group-hover:bg-ink"></span>
         <span class="absolute top-1 right-1 w-1.5 h-1.5 bg-bone transition-colors duration-180 group-hover:bg-ink"></span>
         <span class="absolute bottom-1 left-1 w-1.5 h-1.5 bg-bone transition-colors duration-180 group-hover:bg-ink"></span>
         <span class="absolute bottom-1 right-1 w-1.5 h-1.5 bg-bone transition-colors duration-180 group-hover:bg-ink"></span>
-        {t.build}
-      </a>
+        <span id="copy-email-label">{t.build}</span>
+      </button>
     </div>
 
     <!-- Bottom Right (Row 2, Col 2 & 3): Copyright & Branding Bar -->
@@ -193,3 +200,46 @@ const t = lang === "en" ? copy.en : copy.es;
     </svg>
   </div>
 </section>
+
+<script>
+  const btn = document.getElementById("copy-email");
+  const label = document.getElementById("copy-email-label");
+  let timer: ReturnType<typeof setTimeout> | undefined;
+
+  if (btn && label) {
+    btn.addEventListener("click", async () => {
+      const email = btn.dataset.email ?? "";
+      try {
+        await navigator.clipboard.writeText(email);
+        label.textContent = btn.dataset.copied ?? "";
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          label.textContent = btn.dataset.label ?? "";
+        }, 2000);
+      } catch {
+        // Clipboard unavailable (http, old browser): fall back to mailto
+        window.location.href = `mailto:${email}`;
+      }
+    });
+  }
+
+  // Connect column "Email" link: copy instead of mailto
+  document.querySelectorAll<HTMLAnchorElement>("a[data-copy-email]").forEach((link) => {
+    let linkTimer: ReturnType<typeof setTimeout> | undefined;
+    link.addEventListener("click", async (e) => {
+      if (!navigator.clipboard) return; // no clipboard API: let the mailto href do its thing
+      e.preventDefault();
+      try {
+        await navigator.clipboard.writeText(link.dataset.copyEmail ?? "");
+        link.textContent = "Copied ✓";
+        clearTimeout(linkTimer);
+        linkTimer = setTimeout(() => {
+          link.textContent = link.dataset.label ?? "";
+        }, 2000);
+      } catch {
+        // Copy failed after preventing default: fall back to mailto manually
+        window.location.href = link.href;
+      }
+    });
+  });
+</script>
