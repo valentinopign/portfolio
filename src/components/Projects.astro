@@ -1,44 +1,116 @@
 ---
+interface Props {
+  lang?: "es" | "en";
+}
+const { lang = "es" } = Astro.props;
 const tags = ["Python", "Flask", "Claude API", "Supabase", "Next.js", "Three.js"];
-const specs = [
-  { k: "DOMINIO", v: "LEGAL / NOTARIAL", hot: false },
-  { k: "CAPA IA", v: "AGENTIC LOOPS", hot: false },
-  { k: "ESTADO", v: "EN PRODUCCIÓN", hot: true },
-];
+const orbitTags = ["Next.js", "Node.js", "AI Generation", "PostgreSQL", "Linear", "TailwindCSS"];
+
+const copy = {
+  es: {
+    eyebrow: "PROYECTOS & EXPERIENCIA",
+    specs: [
+      { k: "ROL", v: "FOUNDER", hot: false },
+      { k: "CAPA IA", v: "AGENTIC LOOPS", hot: false },
+      { k: "TRÁMITES", v: "116 GESTIONADOS", hot: false },
+      { k: "ESTADO", v: "PILOTO CON CLIENTES", hot: true },
+    ],
+    orbitSpecs: [
+      { k: "ROL", v: "SOFTWARE ENGINEER", hot: false },
+      { k: "PRODUCTO", v: "LMS / EDTECH", hot: false },
+      { k: "DESDE", v: "MAYO 2026 — ACTUAL", hot: true },
+    ],
+    spine1: "PRODUCTO 01 — PILOTO CON CLIENTES",
+    spine2: "TRABAJO ACTUAL — ORBITUP",
+    escribania: {
+      tagline: "SaaS vertical con IA para escribanías argentinas",
+      p1: "SaaS que automatiza la recolección de datos, la auditoría de documentos societarios y la consulta al Boletín Oficial mediante loops agénticos sobre Claude. Validado con 10 escribanías; actualmente en piloto con 2 estudios.",
+      p2: "Los boletines no exponen APIs públicas: hice ingeniería inversa de sus sistemas de consulta para integrarlos directamente. Al cargar un estatuto, el loop agéntico verifica la existencia de la sociedad en el Boletín Oficial, extrae socios y administradores, rastrea actas y cesiones posteriores para confirmar la vigencia de los mandatos, y genera un informe de auditoría para el cliente. Cobertura: CABA + 2 provincias.",
+      alt1: "Dashboard de EscribanIA: 116 trámites gestionados, accesos rápidos por tipo de documento",
+      alt2: "Analytics de EscribanIA: 45 trámites completados, distribución por tipo de documento",
+    },
+    orbitup: {
+      tagline: "Software Engineer (Full Stack & AI) — plataforma educativa con IA para instituciones de educación superior",
+      body: "Trabajo actual, remoto y jornada completa. Desarrollo y mantengo features full-stack en toda la plataforma web: interfaces integradas con servicios backend y APIs, funcionalidades con IA para la generación automatizada de apuntes, gráficos dinámicos y segmentación inteligente de libros. Mejoro performance y confiabilidad, coordinando con el equipo mobile para una experiencia consistente en Web, Android e iOS. Gestión con Linear.",
+    },
+    close: "Cerrar ✕",
+  },
+  en: {
+    eyebrow: "PROJECTS & EXPERIENCE",
+    specs: [
+      { k: "ROLE", v: "FOUNDER", hot: false },
+      { k: "AI LAYER", v: "AGENTIC LOOPS", hot: false },
+      { k: "FILINGS", v: "116 MANAGED", hot: false },
+      { k: "STATUS", v: "PILOTING WITH CLIENTS", hot: true },
+    ],
+    orbitSpecs: [
+      { k: "ROLE", v: "SOFTWARE ENGINEER", hot: false },
+      { k: "PRODUCT", v: "LMS / EDTECH", hot: false },
+      { k: "SINCE", v: "MAY 2026 — PRESENT", hot: true },
+    ],
+    spine1: "PRODUCT 01 — PILOTING WITH CLIENTS",
+    spine2: "CURRENT WORK — ORBITUP",
+    escribania: {
+      tagline: "Vertical AI SaaS for Argentine notary offices",
+      p1: "SaaS that automates data collection, corporate document auditing, and lookups against the Official Gazette (Boletín Oficial) using agentic loops on Claude. Validated with 10 notary offices; currently piloting with 2 firms.",
+      p2: "The gazettes don't expose public APIs: I reverse-engineered their lookup systems to integrate directly. When a company charter is uploaded, the agentic loop verifies the company's existence in the Official Gazette, extracts partners and officers, traces subsequent minutes and share transfers to confirm the validity of appointments, and generates an audit report for the client. Coverage: CABA + 2 provinces.",
+      alt1: "EscribanIA dashboard: 116 filings managed, quick access by document type",
+      alt2: "EscribanIA analytics: 45 filings completed, breakdown by document type",
+    },
+    orbitup: {
+      tagline: "Software Engineer (Full Stack & AI) — AI-powered educational platform for higher education institutions",
+      body: "Current role, remote and full time. I develop and maintain full-stack features across the whole web platform: interfaces integrated with backend services and APIs, AI-powered features for automated note generation, dynamic charts, and intelligent book segmentation. I improve performance and reliability, coordinating with the mobile team for a consistent experience across Web, Android, and iOS. Managed with Linear.",
+    },
+    close: "Close ✕",
+  },
+};
+const t = lang === "en" ? copy.en : copy.es;
+const specs = t.specs;
+const orbitSpecs = t.orbitSpecs;
 ---
 <section id="proyectos" class="bg-flame text-ink px-[clamp(20px,5vw,72px)] py-[clamp(56px,8vw,120px)]">
-  <div class="max-w-[1320px] mx-auto">
-    <div class="flex flex-wrap items-baseline gap-4 mb-[clamp(36px,5vw,60px)]">
+  <div class="max-w-[1320px] mx-auto flex flex-col gap-12">
+    <div class="flex flex-wrap items-baseline gap-4 mb-[clamp(24px,3vw,36px)]">
       <span class="text-[12px] tracking-[0.22em] font-bold uppercase">04</span>
       <span class="marker-line bg-ink"></span>
-      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">PROYECTOS</span>
+      <span class="text-[12px] tracking-[0.22em] font-bold uppercase">{t.eyebrow}</span>
     </div>
 
+    <!-- Card 1: EscribanIA -->
     <div class="flex flex-wrap border-2 border-ink bg-bone">
       <!-- vertical spine -->
       <div class="bg-ink text-flame flex items-center justify-center px-2.5 py-[18px] [writing-mode:vertical-rl] rotate-180 font-display font-black [font-variation-settings:'wght'_900,'wdth'_118] text-[clamp(13px,1.4vw,18px)] tracking-[0.16em] uppercase">
-        PRODUCTO 01 — EN PRODUCCIÓN
+        {t.spine1}
       </div>
 
-      <div class="flex-[1_1_420px] min-w-[280px] p-[clamp(26px,3.5vw,48px)] text-ink">
-        <div class="group flex flex-wrap items-center gap-3.5">
-          <h3 class="m-0 font-display font-black [font-variation-settings:'wght'_900,'wdth'_122] text-[clamp(40px,6vw,90px)] leading-[0.85] tracking-[-0.03em] uppercase">
-            Escriban<span class="text-flame">IA</span>
-          </h3>
-          <a href="https://escriban-ia.com.ar" target="_blank" rel="noopener"
-             class="no-underline text-ink text-[clamp(22px,3vw,40px)] leading-none inline-block transition-transform duration-[180ms] group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">↗</a>
-        </div>
-        <p class="mt-[18px] mb-0 text-[clamp(12px,1.4vw,15px)] tracking-[0.12em] uppercase font-semibold text-flame">
-          SaaS vertical con IA para escribanías argentinas
-        </p>
-        <p class="mt-4 mb-7 text-[clamp(13px,1.5vw,16px)] leading-[1.65] max-w-[640px]">
-          Producto en producción que automatiza la recolección de datos, la auditoría de documentos societarios y la consulta al Boletín Oficial. Utiliza loops agénticos sobre Claude para resolver tareas reales de oficina.
-        </p>
+      <!-- Left: details -->
+      <div class="flex-[2_1_480px] min-w-[300px] p-[clamp(26px,3.5vw,48px)] text-ink flex flex-col justify-between">
+        <div>
+          <div class="group flex flex-wrap items-center gap-3.5">
+            <h3 class="m-0 font-display font-black [font-variation-settings:'wght'_900,'wdth'_122] text-[clamp(40px,6vw,90px)] leading-[0.85] tracking-[-0.03em] uppercase">
+              Escriban<span class="text-flame">IA</span>
+            </h3>
+            <a href="https://escriban-ia.com.ar" target="_blank" rel="noopener"
+               class="no-underline text-ink flex items-baseline gap-2 transition-transform duration-[180ms] group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">
+              <span class="text-[clamp(22px,3vw,40px)] leading-none">↗</span>
+              <span class="text-[clamp(11px,1.2vw,13px)] tracking-[0.14em] uppercase font-semibold underline underline-offset-4 decoration-[1.5px]">escriban-ia.com.ar</span>
+            </a>
+          </div>
+          <p class="mt-[18px] mb-0 text-[clamp(12px,1.4vw,15px)] tracking-[0.12em] uppercase font-semibold text-flame">
+            {t.escribania.tagline}
+          </p>
+          <p class="mt-4 mb-7 text-[clamp(13px,1.5vw,16px)] leading-[1.65] max-w-[640px]">
+            {t.escribania.p1}
+          </p>
+          <p class="mt-4 mb-7 text-[clamp(13px,1.5vw,16px)] leading-[1.65] max-w-[640px]">
+            {t.escribania.p2}
+          </p>
 
-        <div class="flex flex-wrap gap-2 mb-[30px]">
-          {tags.map((t) => (
-            <span class="border-[1.5px] border-ink px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase font-medium">{t}</span>
-          ))}
+          <div class="flex flex-wrap gap-2 mb-[30px]">
+            {tags.map((t) => (
+              <span class="border-[1.5px] border-ink px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase font-medium">{t}</span>
+            ))}
+          </div>
         </div>
 
         <div class="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] border-t-2 border-l-2 border-ink">
@@ -50,6 +122,148 @@ const specs = [
           ))}
         </div>
       </div>
+
+      <!-- Right: product screenshots -->
+      <div class="flex-[1_1_340px] min-w-[280px] p-[clamp(18px,2vw,28px)] flex flex-col justify-center gap-5 border-t-2 lg:border-t-0 lg:border-l-2 border-ink bg-bone">
+        <a href="/escribania-dashboard.webp" target="_blank" rel="noopener" title="Ver captura completa" data-lightbox
+           class="relative block w-full bg-ink border-2 border-ink overflow-hidden">
+          <img src="/escribania-dashboard.webp" alt={t.escribania.alt1} loading="lazy" class="block w-full h-auto pt-7" />
+          <div class="absolute top-2.5 left-3.5 right-3.5 flex justify-between text-[10px] tracking-[0.18em] uppercase text-[rgba(236,234,227,0.55)] pointer-events-none">
+            <span>UNIT VP−02 / DASHBOARD</span>
+            <span class="text-flame">● LIVE</span>
+          </div>
+          <span class="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 border-flame pointer-events-none"></span>
+          <span class="absolute top-2 right-2 w-3.5 h-3.5 border-t-2 border-r-2 border-flame pointer-events-none"></span>
+          <span class="absolute bottom-2 left-2 w-3.5 h-3.5 border-b-2 border-l-2 border-flame pointer-events-none"></span>
+          <span class="absolute bottom-2 right-2 w-3.5 h-3.5 border-b-2 border-r-2 border-flame pointer-events-none"></span>
+        </a>
+        <a href="/escribania-analytics.webp" target="_blank" rel="noopener" title="Ver captura completa" data-lightbox
+           class="relative block w-full bg-ink border-2 border-ink overflow-hidden">
+          <img src="/escribania-analytics.webp" alt={t.escribania.alt2} loading="lazy" class="block w-full h-auto pt-7" />
+          <div class="absolute top-2.5 left-3.5 right-3.5 flex justify-between text-[10px] tracking-[0.18em] uppercase text-[rgba(236,234,227,0.55)] pointer-events-none">
+            <span>UNIT VP−02 / ANALYTICS</span>
+            <span class="text-flame">● LIVE</span>
+          </div>
+          <span class="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 border-flame pointer-events-none"></span>
+          <span class="absolute top-2 right-2 w-3.5 h-3.5 border-t-2 border-r-2 border-flame pointer-events-none"></span>
+          <span class="absolute bottom-2 left-2 w-3.5 h-3.5 border-b-2 border-l-2 border-flame pointer-events-none"></span>
+          <span class="absolute bottom-2 right-2 w-3.5 h-3.5 border-b-2 border-r-2 border-flame pointer-events-none"></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 2: OrbitUp (Trabajo Actual) -->
+    <div class="flex flex-wrap border-2 border-ink bg-bone">
+      <!-- vertical spine -->
+      <div class="bg-ink text-flame flex items-center justify-center px-2.5 py-[18px] [writing-mode:vertical-rl] rotate-180 font-display font-black [font-variation-settings:'wght'_900,'wdth'_118] text-[clamp(13px,1.4vw,18px)] tracking-[0.16em] uppercase">
+        {t.spine2}
+      </div>
+
+      <!-- Left: details -->
+      <div class="flex-[2_1_480px] min-w-[300px] p-[clamp(26px,3.5vw,48px)] text-ink flex flex-col justify-between">
+        <div>
+          <div class="group flex flex-wrap items-center gap-3.5">
+            <h3 class="m-0 font-display font-black [font-variation-settings:'wght'_900,'wdth'_122] text-[clamp(40px,6vw,90px)] leading-[0.85] tracking-[-0.03em] uppercase">
+              Orbit<span class="text-flame">Up</span>
+            </h3>
+          </div>
+          <p class="mt-[18px] mb-0 text-[clamp(12px,1.4vw,15px)] tracking-[0.12em] uppercase font-semibold text-flame">
+            {t.orbitup.tagline}
+          </p>
+          <p class="mt-4 mb-7 text-[clamp(13px,1.5vw,16px)] leading-[1.65] max-w-[640px]">
+            {t.orbitup.body}
+          </p>
+
+          <div class="flex flex-wrap gap-2 mb-[30px]">
+            {orbitTags.map((t) => (
+              <span class="border-[1.5px] border-ink px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase font-medium">{t}</span>
+            ))}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] border-t-2 border-l-2 border-ink">
+          {orbitSpecs.map((s) => (
+            <div class="border-r-2 border-b-2 border-ink px-4 py-[13px]">
+              <div class="label-eyebrow">{s.k}</div>
+              <div class:list={["font-semibold mt-[5px] text-[13px]", s.hot && "text-flame"]}>{s.v}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: orbits canvas container -->
+      <div class="flex-[1_1_340px] min-w-[280px] p-[clamp(26px,3.5vw,48px)] flex flex-col justify-center border-t-2 lg:border-t-0 lg:border-l-2 border-ink bg-bone">
+        <div id="orbits-box" class="relative w-full h-[220px] bg-ink border-2 border-ink overflow-hidden">
+          <canvas id="orbits-canvas" class="absolute inset-0 block"></canvas>
+          <div class="absolute top-3 left-3.5 right-3.5 flex justify-between text-[10px] tracking-[0.18em] uppercase text-[rgba(236,234,227,0.55)] pointer-events-none">
+            <span>UNIT VP−03 / ORBITS</span>
+            <span class="text-flame">● SYSTEM RUNNING</span>
+          </div>
+          <span class="absolute top-2 left-2 w-3.5 h-3.5 border-t-2 border-l-2 border-flame"></span>
+          <span class="absolute top-2 right-2 w-3.5 h-3.5 border-t-2 border-r-2 border-flame"></span>
+          <span class="absolute bottom-2 left-2 w-3.5 h-3.5 border-b-2 border-l-2 border-flame"></span>
+          <span class="absolute bottom-2 right-2 w-3.5 h-3.5 border-b-2 border-r-2 border-flame"></span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- Lightbox overlay for product screenshots -->
+<div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center p-[clamp(16px,4vw,48px)] bg-[rgba(20,18,16,0.92)]">
+  <button id="lightbox-close" type="button" aria-label={t.close}
+          class="absolute top-4 right-4 bg-flame text-ink border-2 border-flame px-4 py-2.5 text-[12px] tracking-[0.18em] uppercase font-bold cursor-pointer transition-colors duration-[180ms] hover:bg-transparent hover:text-flame">
+    {t.close}
+  </button>
+  <div class="relative max-w-[1400px] w-full max-h-full">
+    <img id="lightbox-img" src="" alt="" class="block w-full h-auto max-h-[85dvh] object-contain border-2 border-flame bg-ink" />
+    <span class="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-flame pointer-events-none"></span>
+    <span class="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-flame pointer-events-none"></span>
+    <span class="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-flame pointer-events-none"></span>
+    <span class="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-flame pointer-events-none"></span>
+  </div>
+</div>
+
+<script>
+  import { initOrbits } from "../scripts/orbits";
+
+  // Orbits
+  const obox = document.getElementById("orbits-box");
+  const ocanvas = document.getElementById("orbits-canvas") as HTMLCanvasElement | null;
+  if (obox && ocanvas) {
+    const ohandle = initOrbits(obox, ocanvas);
+    window.addEventListener("beforeunload", () => ohandle.cleanup());
+  }
+
+  // Lightbox
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img") as HTMLImageElement | null;
+  const lightboxClose = document.getElementById("lightbox-close");
+
+  function closeLightbox() {
+    lightbox?.classList.add("hidden");
+    lightbox?.classList.remove("flex");
+    document.body.style.overflow = "";
+  }
+
+  if (lightbox && lightboxImg && lightboxClose) {
+    document.querySelectorAll<HTMLAnchorElement>("a[data-lightbox]").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        lightboxImg.src = link.href;
+        lightboxImg.alt = link.querySelector("img")?.alt ?? "";
+        lightbox.classList.remove("hidden");
+        lightbox.classList.add("flex");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeLightbox();
+    });
+  }
+</script>

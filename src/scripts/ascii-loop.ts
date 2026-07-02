@@ -6,9 +6,7 @@ export function initAsciiLoop(box: HTMLElement, canvas: HTMLCanvasElement): Loop
   const ctx = canvas.getContext("2d");
   if (!ctx) return { cleanup: () => {} };
 
-  const prefersReduced =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const prefersReduced = false;
 
   const NODES = ["SIGNAL", "CONTEXT", "BUILD", "TEST", "DEPLOY"];
   const COL = {
@@ -39,14 +37,17 @@ export function initAsciiLoop(box: HTMLElement, canvas: HTMLCanvasElement): Loop
     cellW = W / C;
     cellH = H / R;
     fontPx = Math.min(cellH * 0.98, cellW / 0.6);
+    if (!running) {
+      drawFrame();
+    }
   };
 
   const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
   const start = performance.now();
 
-  const drawFrame = () => {
+  function drawFrame(): boolean {
     const time = (performance.now() - start) / 1000;
-    if (W < 2 || H < 2) return;
+    if (W < 2 || H < 2) return false;
 
     const N = C * R;
     const chars: string[] = new Array(N).fill(" ");
@@ -128,11 +129,16 @@ export function initAsciiLoop(box: HTMLElement, canvas: HTMLCanvasElement): Loop
         ctx.fillText(ch, x * cellW, y * cellH);
       }
     }
-  };
+    return true;
+  }
 
   const loop = () => {
     if (!running) return;
-    if (isVisible) drawFrame();
+    if (isVisible) {
+      const drew = drawFrame();
+      // Reduced motion: keep looping only until we land one real (sized) frame.
+      if (drew && prefersReduced) { running = false; return; }
+    }
     raf = requestAnimationFrame(loop);
   };
 
@@ -149,18 +155,24 @@ export function initAsciiLoop(box: HTMLElement, canvas: HTMLCanvasElement): Loop
   }
 
   resize();
-  if (prefersReduced) {
-    drawFrame();
-  } else {
-    running = true;
-    raf = requestAnimationFrame(loop);
+  // Re-measure once fonts/layout settle so the first frame isn't drawn against a
+  // zero-size box (e.g. when CSS hasn't applied yet at module-execution time).
+  if (typeof document !== "undefined" && document.fonts?.ready) {
+    document.fonts.ready.then(() => resize());
   }
+  window.addEventListener("load", onResize, { once: true });
+
+  // Always run the rAF loop: it keeps retrying until the box has a real size.
+  // In reduced-motion mode the loop self-stops after the first sized frame.
+  running = true;
+  raf = requestAnimationFrame(loop);
 
   return {
     cleanup() {
       running = false;
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("load", onResize);
       ro?.disconnect();
       io?.disconnect();
     },

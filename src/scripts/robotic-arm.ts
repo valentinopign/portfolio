@@ -2,27 +2,269 @@ export interface ArmHandle {
   cleanup: () => void;
 }
 
+const ASCII_ART = `                                                                                                                    
+                                                                                                                    
+                                                                                                                    
+                                                                            .----::.                                
+                                                                  :---------:::::::::---:.                           
+                              .::-----------::.  ....       :--::::::::::::::::::--------.                         
+                            :------::::::::::-----=------:::-=::::::::::::::::::..---=-----                        
+                      .:--+=-::::::::::::::::::::--::::::::::=-:::::::::::::::::-===----:--                        
+                    +*.-===:-:::-:--:::::::::-:::=-:::::::::-=-:=::-------:-=:-=++=---:----                        
+                  -*+=*  ----::--==-----::::------=-----------===-------==+++===-::-:::-----                       
+                 -=+:=  ::-::-.----+-----::::==-----=-             :--------:--:-::::-======-                      
+                 *.**-  :::-:-.-:--+------------.                             -:::-=+++#####*:                     
+                ****##+++==-=::=::--=--=:....                                 --=++###+++**#*                      
+              :**=*+ .:+#+*====--:-----:                                      :=*#%*+*####****+*=                  
+                         -*+*+=--:----:                                        -+**++++++++*+**+*++:               
+                           -+*+=--:---:                                          **+++++++++++*####*++:            
+                            :-++=-:----.                                        -+*%#+*##+**###=+::=+#*++:.        
+                            .=+*+--:----                                        ++*#*##****+         *#++++        
+                             -++*=-:-----                                      =**:-                  =+#*:        
+                             .=+*+--:-----                                     *++-                  .#*+*.        
+                              :++*=-::-----                                   +++++=                  :#*+:        
+                              .-+*+=-::-----                                 .*#**##+.                 .**         
+                               :=+*=--::-----.                                 :++-*#+.                            
+                                -==*=--::-----:                                   -=++-                            
+                                .-++*=--:::-----                                    -=                             
+                                 :-*+*=--:::-----                                                                  
+                                  -=::-=-:::::----.                                                                
+                                  .:+**+=-::::::---.                                                               
+                                   ::=**+=---::::---=-------:                                                      
+                                    --++*=-----::::-=+---:-----                                                    
+                                    .--*=*=----::::-===+-::-----:                                                  
+                                     :-=+*+=--:::---==--==-:------                                                 
+                                      :=#=*++=-::::--===-==-:------                                                
+                                       =*=#+==---:::---=--=--:-----.                                               
+                                       =*=#+==---::.---==-=--:-----:                                               
+                                       -=-#=----:-::---=--=--:-----:                                               
+                                      .=--*=----=-::---==-=--:-----                                                
+                                    ..===*-====--::---==-==-:------                                                
+                                :*+*.=*+++==------=====-=+--:-----                                                 
+                                -**#*#=+*+=----======--+---:----:                                                  
+                              ::=*#++**#++--------===----:-----                                                    
+                              -+++**#++*+==----------::--==-.                                                      
+                            .--====+++=+===-------:--===:.                                                         
+                            .:::::-====+==--------====.                                                            
+                            .:::::-====+==------====-                                                              
+                          .:-:::::=====+===---===---+=.                                                            
+                          --===--:===+++++===-=====--=:                                                            
+                     .-*##---:::::::::......:::------=*#####:.                                                     
+                .=########*=----::::::......::----==#%#########=:                                                  
+               +**######********#################*****####**#***--                                                 
+             ---*+++++**###########################*++++*#*##=*#::.                                                
+            .---**++++++========++=======++++*++====++++*#*##=*#:::-.                                              
+          =*----**+++++++++=====-*+=---:::::+---====++++*#*##=##::::+#                                             
+         ==-----**++++++++++====-**=---:::::#---====+#######***#:::::=.                                            
+                .+++++++++++++==-#*==---:::-#---====+++++++++-                                                     
+                    :==+++++++==-###*+===##+#---====++=-.                                                          
+                                *#**###******+                                                                     
+                                 .........`;
+
+const BOX_ASCII = `
+                                                                                                                    
+                                                                                                                    
+                                                                    ....::::::::...                                 
+                                                           ..::::::::::::::::::::::::::.                            
+                                                ....:::::::::::::::::::::::::::::.....  ....                        
+                                      ....::::::::::::::::::::::::::::::........ . ... ....::::::::..               
+                            ...:::::::::::::::::::::::::::::::..    .... .  ......:-::::::::::::::::::::::.         
+                 ....:::::::::::::::::::::::::::::......           ....:..::::::::::::::::::::::::::::::::::::::.   
+            :::::::::::::::::::::::::::::.....            ....:-:::::::::::::::::::::::::::::::::::::::----------.  
+            :::::::::::::::::......              .....:::::::::::::::::::::::::::::::::::::::::------------------.  
+            ::::::::::-..                .::..:::::::::::::::::::::::::::::::::::::::---------------------------:   
+            :::::::::::.      ....::::::::::::::::::::::::::::::::::::::::::------------------------------------:   
+            .:::::::::::      .:::::::::::::::::::::::::::::::::::----------------------------------------------:   
+            .:::::::::::.     .:::::::::::::::::::::::::::------------------------------------------------------:   
+            .:::::::::::.     .::::::::::::::::::---------------------------------------------------------------:   
+            .:::::::::::.     .::::::::::::::-------------------------------------------------------------------:   
+            .:::::::::::::.    ::::::::::::::-------------------------------------------------------------------:   
+             :::::::::::::::::.::::::::::::::-------------------------------------------------------------------.   
+             ::::::::::::::::::::::::::::::::-------------------------------------------------------------------.   
+             ::::::::::::::::::::::::::::::::-------------------------------------------------------------------.   
+             ::::::::::::::::::::::::::::::::-------------------------------------------------------------------    
+             ::::::::::::::::::::::::::::::::-------------------------------------------------------------------    
+             ::::::::::::::::::::::::::::::::-------------------------------------------------------------------    
+             ::::::::::::::::::::::::::::::::-------------------------------------------------------------------    
+             .:::::::::::::::::::::::::::::::-------------------------------------------------------------------    
+             .:::::::::::::::::::::::::::::::-------------------------------------------------------------------    
+             .:::::::::::::::::::::::::::::::-----------------------------------------------------=------------:    
+             .:::::::::::::::::::::::::::::::---------------------------------------------===-----------------=:    
+             .:::::::::::::::::::::::::::::::---------------------------------------=-----=====================.    
+             .:::::::::::::::::::::::::::::::--------------------------------------=--==--=====================.    
+             .:::::::::::::::::::::::::::::::-------------------------------=+**===-===========================.    
+             .:::::::::::::::::::::::::::::::-----------------------===+#*=====*===============================     
+             .:::::::::::::::::::::::::::::::-----------------=+++++=+=+-+%%%%+*===============================     
+              :::::::::::::::::::::::::::::::-----------=*#*++==#%%+=+=+*%**+==*===============================     
+              :::::::::::::::::::::::::::::::----==+*+--+==*++-=%%#==*=+===+===#=============================-.     
+               .--:::::::::::::::::::::::::::----=+-##=+##=*++===+===*++===+==*#=====================+-::..         
+                  .:-::::::::::::::::::::::::----=+**++-*=-*++=======*+++#*==================+===:....              
+                     .::-::::::::::::::::::::----=+-*+==*==*++==**++*+=================+=--:.....                   
+                         .---::--::::::::::::--===+-*+==+=+*=+===================++-:.......                        
+                            .::--::::::::::::----=++=+*+==================+===:........                             
+                               ..----::::::::----====================+=::...........                                
+                                   .-----::::--==================:...........                                       
+                                      .:----:--========++---..........                                              
+                                          :---====+=:...........                                                    
+                                             .:.                                                                    
+`;
+
+interface ArtPoint {
+  x: number;
+  y: number;
+  ch: string;
+  segment: number; // 0: Base, 1: Lower Arm, 2: Upper Arm, 3: Claw
+  color: string;
+}
+
+interface BoxPoint {
+  dx: number; // offset from box center
+  dy: number;
+  ch: string;
+  color: string;
+}
+
+function parseBoxASCII(ascii: string): BoxPoint[] {
+  const lines = ascii.split("\n");
+  let minX = 9999, maxX = -9999, minY = 9999, maxY = -9999;
+  
+  // Find bounds of non-empty chars
+  for (let y = 0; y < lines.length; y++) {
+    const line = lines[y];
+    for (let x = 0; x < line.length; x++) {
+      if (line[x] !== " " && line[x] !== "\r" && line[x] !== undefined) {
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+
+  const w = maxX - minX;
+  const h = maxY - minY;
+  
+  // Downsample to target size (16 wide, 7 high)
+  const targetW = 16;
+  const targetH = 7;
+  
+  const grid: { ch: string; color: string }[][] = Array.from({ length: targetH + 1 }, () => 
+    Array.from({ length: targetW + 1 }, () => ({ ch: " ", color: "" }))
+  );
+
+  const getColor = (ch: string): string => {
+    if (ch === "%" || ch === "#") return "#FFFFFF"; // Pure white highlight
+    if (ch === "=" || ch === "*") return "#F4D3B2"; // Very light cream/kraft
+    if (ch === "+" || ch === "-") return "#DDA15E"; // Warm golden cardboard
+    if (ch === ":" || ch === ".") return "#BC6C25"; // Cardboard brown
+    return "#DDA15E";
+  };
+
+  const getWeight = (ch: string): number => {
+    if (ch === " " || ch === "\r") return 0;
+    if (ch === "." || ch === ":" || ch === "-") return 1;
+    if (ch === "+" || ch === "=" || ch === "*") return 2;
+    if (ch === "#" || ch === "%") return 3;
+    return 1;
+  };
+
+  for (let y = 0; y < lines.length; y++) {
+    const line = lines[y];
+    for (let x = 0; x < line.length; x++) {
+      const ch = line[x];
+      if (ch === " " || ch === "\r" || ch === "" || ch === undefined) continue;
+      
+      const tx = Math.min(targetW, Math.max(0, Math.round((x - minX) * (targetW / w))));
+      const ty = Math.min(targetH, Math.max(0, Math.round((y - minY) * (targetH / h))));
+      
+      const curWeight = getWeight(grid[ty][tx].ch);
+      const newWeight = getWeight(ch);
+      if (newWeight > curWeight) {
+        grid[ty][tx] = { ch, color: getColor(ch) };
+      }
+    }
+  }
+
+  const pts: BoxPoint[] = [];
+  const cx = targetW / 2;
+  const cy = targetH / 2;
+  for (let y = 0; y <= targetH; y++) {
+    for (let x = 0; x <= targetW; x++) {
+      if (grid[y][x].ch !== " ") {
+        pts.push({
+          dx: x - cx,
+          dy: y - cy,
+          ch: grid[y][x].ch,
+          color: grid[y][x].color,
+        });
+      }
+    }
+  }
+  return pts;
+}
+
 export function initRoboticArm(box: HTMLElement, canvas: HTMLCanvasElement): ArmHandle {
   const ctx = canvas.getContext("2d");
   if (!ctx) return { cleanup: () => {} };
 
-  const prefersReduced =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  let W = 0, H = 0, dpr = 1, C = 60, R = 30, cellW = 8, cellH = 12, fontPx = 12;
-  let raf = 0;
-  let isVisible = true;
-  let running = false;
+  const prefersReduced = false; // Force animation on
 
   const COL = {
-    arm: "#FF6A2B",
-    joint: "#FFEDE2",
-    claw: "#FF8A4C",
-    box: "#F2EFE8",
-    dim: "rgba(255,109,43,0.15)",
-    hud: "rgba(236,234,227,0.5)",
+    arm: "#FF6A2B",     // Flame/Orange highlights
+    joint: "#FFEDE2",   // Cream/White
+    hud: "rgba(236,234,227,0.7)", // Light grey/white
+    dim: "rgba(255,109,43,0.35)",  // Dim orange
+    bgDot: "rgba(255,109,43,0.12)",
   };
+
+  const getColor = (ch: string): string => {
+    if (ch === "=" || ch === "+" || ch === "*") return COL.arm;
+    if (ch === "#" || ch === "%") return COL.joint;
+    if (ch === ":" || ch === "-") return COL.hud;
+    if (ch === ".") return COL.dim;
+    return COL.hud;
+  };
+
+  // Parse ASCII art once into point array
+  const lines = ASCII_ART.split("\n");
+  const points: ArtPoint[] = [];
+
+  for (let y = 0; y < lines.length; y++) {
+    const line = lines[y];
+    for (let x = 0; x < line.length; x++) {
+      const ch = line[x];
+      if (ch === " " || ch === "") continue;
+
+      // Classify segment
+      let segment = 0;
+      if (y >= 47) {
+        segment = 0; // Base
+      } else if (y >= 25) {
+        segment = 1; // Lower Arm (Body)
+      } else {
+        if (x >= 61) {
+          segment = 3; // Claw
+        } else {
+          segment = 2; // Upper Arm (Forearm)
+        }
+      }
+
+      points.push({
+        x,
+        y,
+        ch,
+        segment,
+        color: getColor(ch),
+      });
+    }
+  }
+
+  // Parse custom box ASCII
+  const boxPoints = parseBoxASCII(BOX_ASCII);
+
+  let W = 0, H = 0, dpr = 1, C = 120, R = 60, cellW = 4, cellH = 7, fontPx = 7;
+  let raf = 0, isVisible = true, running = false;
+  let offsetX = 0, offsetY = 0;
 
   const resize = () => {
     const r = box.getBoundingClientRect();
@@ -34,164 +276,244 @@ export function initRoboticArm(box: HTMLElement, canvas: HTMLCanvasElement): Arm
     canvas.style.width = W + "px";
     canvas.style.height = H + "px";
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const target = Math.max(7, Math.min(12, Math.round(H / 40)));
-    const cw = target * 0.6, ch = target;
-    C = Math.max(48, Math.min(190, Math.floor(W / cw)));
-    R = Math.max(30, Math.min(96, Math.floor(H / ch)));
-    cellW = W / C;
-    cellH = H / R;
-    fontPx = Math.min(cellH * 0.98, cellW / 0.6);
+
+    // Fit grid maintaining character aspect ratio (width = 0.6 * height)
+    fontPx = Math.max(4.5, Math.min(9.5, Math.min(H / 60, (W / 120) / 0.6)));
+    cellH = fontPx;
+    cellW = fontPx * 0.6;
+    
+    C = Math.floor(W / cellW);
+    R = Math.floor(H / cellH);
+
+    // Centering offsets
+    offsetX = Math.floor((C - 120) / 2);
+    offsetY = Math.min(Math.floor((R - 60) / 2), R - 61);
+
+    if (!running) {
+      drawFrame();
+    }
   };
 
-  const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-  const ss = (t: number) => (t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t));
-  const clampN = (v: number, a: number, b: number) => (v < a ? a : v > b ? b : v);
+  const rotate = (dx: number, dy: number, angle: number) => {
+    const cos = Math.cos(angle);
+    const sin = Math.sin(angle);
+    return {
+      x: dx * cos - dy * sin,
+      y: dx * sin + dy * cos,
+    };
+  };
 
   const start = performance.now();
 
-  const drawFrame = () => {
+  function drawFrame(): boolean {
     const now = performance.now();
     const time = (now - start) / 1000;
-    if (W < 2 || H < 2) return;
+    if (W < 2 || H < 2) return false;
 
     const N = C * R;
     const chars: string[] = new Array(N).fill(" ");
     const cols: (string | null)[] = new Array(N).fill(null);
     const id = (x: number, y: number) => y * C + x;
+
     const set = (x: number, y: number, ch: string, c: string) => {
       x = Math.round(x); y = Math.round(y);
       if (x < 0 || y < 0 || x >= C || y >= R) return;
       chars[id(x, y)] = ch; cols[id(x, y)] = c;
     };
-    const line = (x0: number, y0: number, x1: number, y1: number, ch: string, c: string) => {
-      const steps = Math.max(1, Math.ceil(Math.hypot(x1 - x0, y1 - y0)));
-      for (let i = 0; i <= steps; i++) {
-        const t = i / steps;
-        set(lerp(x0, x1, t), lerp(y0, y1, t), ch, c);
-      }
-    };
-    const lineAuto = (x0: number, y0: number, x1: number, y1: number, c: string) => {
-      const dx = x1 - x0, dy = y1 - y0;
-      const m = Math.abs(dy) / (Math.abs(dx) + 1e-6);
-      let ch = "=";
-      if (m < 0.45) ch = "=";
-      else if (m > 2.4) ch = "|";
-      else ch = (dy * dx < 0) ? "/" : "\\";
-      line(x0, y0, x1, y1, ch, c);
-    };
-    const unit = (ax: number, ay: number, bx: number, by: number) => {
-      const dx = bx - ax, dy = by - ay, l = Math.hypot(dx, dy) || 1;
-      return { x: dx / l, y: dy / l, l };
-    };
-    const housing = (x0: number, y0: number, x1: number, y1: number, w: number, edgeC: string, detail: boolean) => {
-      const u = unit(x0, y0, x1, y1); const nx = -u.y, ny = u.x;
-      lineAuto(x0 + nx * w, y0 + ny * w, x1 + nx * w, y1 + ny * w, edgeC);
-      lineAuto(x0 - nx * w, y0 - ny * w, x1 - nx * w, y1 - ny * w, edgeC);
-      lineAuto(x0 + nx * w, y0 + ny * w, x0 - nx * w, y0 - ny * w, edgeC);
-      lineAuto(x1 + nx * w, y1 + ny * w, x1 - nx * w, y1 - ny * w, edgeC);
-      if (detail) {
-        const steps = Math.max(3, Math.round(u.l));
-        for (let i = 2; i < steps - 1; i += 2) { const t = i / steps; set(x0 + u.x * u.l * t, y0 + u.y * u.l * t, ".", COL.dim); }
-        set(x0 + u.x * 1.6 + nx * w * 0.55, y0 + u.y * 1.6 + ny * w * 0.55, "o", edgeC);
-        set(x0 + u.x * 1.6 - nx * w * 0.55, y0 + u.y * 1.6 - ny * w * 0.55, "o", edgeC);
-        set(x1 - u.x * 1.6 + nx * w * 0.55, y1 - u.y * 1.6 + ny * w * 0.55, "o", edgeC);
-        set(x1 - u.x * 1.6 - nx * w * 0.55, y1 - u.y * 1.6 - ny * w * 0.55, "o", edgeC);
-      }
-    };
-    const gear = (cx: number, cy: number, r: number, ringC: string, hubC: string) => {
-      const st = Math.max(12, Math.round(r * 7));
-      for (let i = 0; i < st; i++) { const a = i / st * Math.PI * 2; set(cx + Math.cos(a) * r, cy + Math.sin(a) * r, "o", ringC); }
-      for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2; set(cx + Math.cos(a) * (r + 0.9), cy + Math.sin(a) * (r + 0.9), "+", ringC); }
-      const ir = Math.max(1, r * 0.42); const ist = Math.max(6, Math.round(ir * 6));
-      for (let i = 0; i < ist; i++) { const a = i / ist * Math.PI * 2; set(cx + Math.cos(a) * ir, cy + Math.sin(a) * ir, "o", hubC); }
-      set(cx, cy, "@", hubC);
-    };
-    const gripper = (wx: number, wy: number, ux: number, uy: number, op: number) => {
-      const nx = -uy, ny = ux;
-      const pw = Math.max(1.4, R * 0.034);
-      const palmExt = R * 0.05 + 1.5;
-      const fl = Math.max(3, R * 0.105);
-      const px = wx + ux * palmExt, py = wy + uy * palmExt;
-      housing(wx - ux * 1.4, wy - uy * 1.4, px, py, pw, COL.claw, true);
-      const gap = lerp(0.9, Math.max(2.4, R * 0.075), op);
-      const aB = { x: px + nx * gap, y: py + ny * gap };
-      const bB = { x: px - nx * gap, y: py - ny * gap };
-      lineAuto(aB.x, aB.y, bB.x, bB.y, COL.claw);
-      const aT = { x: aB.x + ux * fl, y: aB.y + uy * fl };
-      const bT = { x: bB.x + ux * fl, y: bB.y + uy * fl };
-      housing(aB.x, aB.y, aT.x, aT.y, 0.9, COL.claw, false);
-      housing(bB.x, bB.y, bT.x, bT.y, 0.9, COL.claw, false);
-      lineAuto(aT.x, aT.y, aT.x - nx * (gap * 0.55), aT.y - ny * (gap * 0.55), COL.claw);
-      lineAuto(bT.x, bT.y, bT.x + nx * (gap * 0.55), bT.y + ny * (gap * 0.55), COL.claw);
-      set(aB.x, aB.y, "O", COL.joint);
-      set(bB.x, bB.y, "O", COL.joint);
-      return { px, py, fl };
-    };
-    const crate = (cx: number, cy: number, c: string) => {
-      const w = 2;
-      for (let x = -w; x <= w; x++) { set(cx + x, cy - w, "=", c); set(cx + x, cy + w, "=", c); }
-      for (let y = -w; y <= w; y++) { set(cx - w, cy + y, "|", c); set(cx + w, cy + y, "|", c); }
-      set(cx - w, cy - w, "+", c); set(cx + w, cy - w, "+", c); set(cx - w, cy + w, "+", c); set(cx + w, cy + w, "+", c);
-      for (let i = -w + 1; i <= w - 1; i++) { set(cx + i, cy + i, "\\", COL.dim); set(cx + i, cy - i, "/", COL.dim); }
-    };
 
+    // Faint background dot field
     for (let y = 0; y < R; y++) {
       for (let x = 0; x < C; x++) {
-        if (((x * 11 + y * 17) % 23) === 0) { chars[id(x, y)] = "."; cols[id(x, y)] = COL.dim; }
+        if (((x * 11 + y * 17) % 23) === 0) {
+          set(x, y, ".", COL.bgDot);
+        }
       }
     }
 
-    const S = { x: C * 0.30, y: R * 0.62 };
-    const U = R * 0.34, F = R * 0.30;
-    const pick = { x: C * 0.80, y: R * 0.74 };
-    const drop = { x: C * 0.30, y: R * 0.34 };
-    const hover = R * 0.16;
-    const pickHi = { x: pick.x, y: pick.y - hover };
-    const dropHi = { x: drop.x, y: drop.y - hover };
-    const armW = Math.max(1.6, R * 0.044);
+    // Kinematics angle calculations based on loop phase (10 second cycle)
+    const t = time % 10;
+    let theta1 = 0, theta2 = 0, theta3 = 0;
+    let phi = 0.08; // Claw open angle
+    let bx = 92;
+    let by = 48;
 
-    const P = 6.6;
-    const ph = (time % P) / P;
-    const E = { x: 0, y: 0 }; let grab = 0, open = 1;
-    if (ph < 0.16) { const t = ss(ph / 0.16); E.x = pickHi.x; E.y = lerp(pickHi.y, pick.y, t); open = 1; grab = 0; }
-    else if (ph < 0.27) { const t = ss((ph - 0.16) / 0.11); E.x = pick.x; E.y = pick.y; open = 1 - t; grab = 0; }
-    else if (ph < 0.50) { const t = ss((ph - 0.27) / 0.23); E.x = lerp(pick.x, drop.x, t); E.y = lerp(pick.y, drop.y, t) - Math.sin(t * Math.PI) * hover * 1.5; open = 0; grab = 1; }
-    else if (ph < 0.61) { const t = ss((ph - 0.50) / 0.11); E.x = drop.x; E.y = drop.y; open = t; grab = 1 - t; }
-    else if (ph < 0.80) { const t = ss((ph - 0.61) / 0.19); E.x = drop.x; E.y = lerp(drop.y, dropHi.y, t); open = 1; grab = 0; }
-    else { const t = ss((ph - 0.80) / 0.20); E.x = lerp(dropHi.x, pickHi.x, t); E.y = lerp(dropHi.y, pickHi.y, t); open = 1; grab = 0; }
-    E.y += Math.sin(time * 1.8) * 0.22;
+    const Rest = { t1: -0.05, t2: 0.0, t3: 0.0 };
+    const Reach = { t1: 0.28, t2: 0.55, t3: -0.15 }; // t2 lowered so the claw stops on top of the box instead of sinking into it
+    const High = { t1: -0.25, t2: -0.10, t3: 0.10 };
 
-    const dxk = E.x - S.x, dyk = E.y - S.y;
-    let d = Math.hypot(dxk, dyk);
-    d = clampN(d, Math.abs(U - F) + 0.6, U + F - 0.6);
-    const phi = Math.atan2(dyk, dxk);
-    const cosB = clampN((d * d + U * U - F * F) / (2 * U * d), -1, 1);
-    const beta = Math.acos(cosB);
-    let a1 = phi - beta;
-    let elbow = { x: S.x + U * Math.cos(a1), y: S.y + U * Math.sin(a1) };
-    if (elbow.y > S.y - 0.4) { a1 = phi + beta; elbow = { x: S.x + U * Math.cos(a1), y: S.y + U * Math.sin(a1) }; }
-    const wrist = { x: E.x, y: E.y };
-    const gd = unit(elbow.x, elbow.y, wrist.x, wrist.y);
+    // Lock the lower body + base: movement comes ONLY from the elbow up.
+    // theta1 (body rotation around the base) is held at its rest pose for the
+    // whole frame, so the elbow pivot is stationary and the box math stays in
+    // sync with the claw. Only theta2 (forearm) and theta3 (claw) animate below.
+    theta1 = Rest.t1;
 
-    const fy = R * 0.93;
-    for (let x = Math.round(pick.x) - 7; x <= Math.round(pick.x) + 7; x++) set(x, pick.y + 6, "_", COL.dim);
-    housing(S.x - R * 0.11, fy, S.x + R * 0.11, fy, R * 0.028, COL.arm, false);
-    set(S.x - R * 0.085, fy, "o", COL.joint); set(S.x + R * 0.085, fy, "o", COL.joint);
-    housing(S.x, fy - R * 0.028, S.x, S.y, armW * 1.15, COL.arm, true);
-    housing(S.x, S.y, elbow.x, elbow.y, armW, COL.arm, true);
-    gear(S.x, S.y, armW + 1.3, COL.arm, COL.joint);
-    housing(elbow.x, elbow.y, wrist.x, wrist.y, armW * 0.85, COL.arm, true);
-    gear(elbow.x, elbow.y, armW + 0.6, COL.arm, COL.joint);
-    gear(wrist.x, wrist.y, armW * 0.7 + 0.6, COL.claw, COL.joint);
-    const gr = gripper(wrist.x, wrist.y, gd.x, gd.y, open);
+    const floorX = 91;
+    const floorY = 49;
 
-    const boxAt = grab > 0.5
-      ? { x: wrist.x + gd.x * (gr.fl * 0.6 + R * 0.05 + 1.5), y: wrist.y + gd.y * (gr.fl * 0.6 + R * 0.05 + 1.5) }
-      : { x: pick.x, y: pick.y + 4 };
-    crate(Math.round(boxAt.x), Math.round(boxAt.y), COL.box);
+    // Fine-tune where the held box sits relative to the claw so it stays
+    // centered between the two fingers instead of resting on the right one.
+    const boxGripDX = -6; // negative = shift box left
+    const boxGripDY = 5;  // positive = shift box down
 
-    if (Math.floor(time * 2) % 2 === 0) set(C - 2, 2, "_", COL.hud);
+    function easeInOut(x: number): number {
+      return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+    }
 
+    if (t < 2.5) {
+      // 1. Rest to Reach Pose
+      const p = t / 2.5;
+      const ep = easeInOut(p);
+      theta2 = Rest.t2 + (Reach.t2 - Rest.t2) * ep;
+      theta3 = Rest.t3 + (Reach.t3 - Rest.t3) * ep;
+      
+      if (t > 2.0) {
+        // Closes claw around box between 2.0s and 2.5s
+        const cp = (t - 2.0) / 0.5;
+        phi = 0.08 * (1 - cp);
+      } else {
+        phi = 0.08;
+      }
+      bx = floorX;
+      by = floorY;
+    } else if (t < 3.5) {
+      // 2. Grabbing box on the floor
+      theta2 = Reach.t2;
+      theta3 = Reach.t3;
+      phi = 0.0;
+      bx = floorX;
+      by = floorY;
+    } else if (t < 6.0) {
+      // 3. Lifting box to High Pose
+      const p = (t - 3.5) / 2.5;
+      const ep = easeInOut(p);
+      theta2 = Reach.t2 + (High.t2 - Reach.t2) * ep;
+      theta3 = Reach.t3 + (High.t3 - Reach.t3) * ep;
+      phi = 0.0;
+      
+      // Calculate active claw position to attach box
+      const elbowLocal = rotate(35 - 55, 25 - 47, theta1);
+      const ex = 55 + elbowLocal.x;
+      const ey = 47 + elbowLocal.y;
+      const wristLocal = rotate(75 - 35, 14 - 25, theta1 + theta2);
+      const wx_wrist = ex + wristLocal.x;
+      const wy_wrist = ey + wristLocal.y;
+      bx = wx_wrist + Math.cos(theta1 + theta2 + theta3) * 22 + boxGripDX;
+      by = wy_wrist + Math.sin(theta1 + theta2 + theta3) * 22 + boxGripDY;
+    } else if (t < 6.5) {
+      // 4. Holding box high
+      theta2 = High.t2;
+      theta3 = High.t3;
+      phi = 0.0;
+      
+      const elbowLocal = rotate(35 - 55, 25 - 47, theta1);
+      const ex = 55 + elbowLocal.x;
+      const ey = 47 + elbowLocal.y;
+      const wristLocal = rotate(75 - 35, 14 - 25, theta1 + theta2);
+      const wx_wrist = ex + wristLocal.x;
+      const wy_wrist = ey + wristLocal.y;
+      bx = wx_wrist + Math.cos(theta1 + theta2 + theta3) * 22 + boxGripDX;
+      by = wy_wrist + Math.sin(theta1 + theta2 + theta3) * 22 + boxGripDY;
+    } else if (t < 9.0) {
+      // 5. Returning to Rest Pose & Dropping the box
+      const p = (t - 6.5) / 2.5;
+      const ep = easeInOut(p);
+      theta2 = High.t2 + (Rest.t2 - High.t2) * ep;
+      theta3 = High.t3 + (Rest.t3 - High.t3) * ep;
+      
+      if (t < 6.8) {
+        // Claw opens between 6.5s and 6.8s
+        const op = (t - 6.5) / 0.3;
+        phi = 0.08 * op;
+      } else {
+        phi = 0.08;
+      }
+      
+      // Box drops straight down from exactly where it was being held at the
+      // High pose, so there's no upward/sideways jump when the claw lets go.
+      const elbowLocal = rotate(35 - 55, 25 - 47, theta1);
+      const ex = 55 + elbowLocal.x;
+      const ey = 47 + elbowLocal.y;
+      const wristLocal = rotate(75 - 35, 14 - 25, theta1 + High.t2);
+      const wx_wrist = ex + wristLocal.x;
+      const wy_wrist = ey + wristLocal.y;
+      const dropStartX = wx_wrist + Math.cos(theta1 + High.t2 + High.t3) * 22 + boxGripDX;
+      const dropStartY = wy_wrist + Math.sin(theta1 + High.t2 + High.t3) * 22 + boxGripDY;
+
+      const dt = t - 6.5;
+      bx = dropStartX;
+      by = Math.min(floorY, dropStartY + 0.5 * 60 * dt * dt);
+    } else {
+      // 6. Reset pose waiting on next loop
+      theta2 = Rest.t2;
+      theta3 = Rest.t3;
+      phi = 0.08;
+      bx = floorX;
+      by = floorY;
+    }
+
+    // Precalculate world pivots for drawing the arm
+    const elbowLocal = rotate(35 - 55, 25 - 47, theta1);
+    const ex = 55 + elbowLocal.x;
+    const ey = 47 + elbowLocal.y;
+
+    const wristLocal = rotate(75 - 35, 14 - 25, theta1 + theta2);
+    const wx_wrist = ex + wristLocal.x;
+    const wy_wrist = ey + wristLocal.y;
+
+    // Rotate and map all ASCII arm points
+    points.forEach((p) => {
+      let wx = p.x;
+      let wy = p.y;
+
+      if (p.segment === 1) {
+        // Lower Arm: rotate around Base pivot (55, 47)
+        const r = rotate(p.x - 55, p.y - 47, theta1);
+        wx = 55 + r.x;
+        wy = 47 + r.y;
+      } else if (p.segment === 2) {
+        // Upper Arm: rotate around Elbow pivot (ex, ey)
+        const r = rotate(p.x - 35, p.y - 25, theta1 + theta2);
+        wx = ex + r.x;
+        wy = ey + r.y;
+      } else if (p.segment === 3) {
+        // Claw: wrist pivot is (75, 14).
+        let cx = p.x;
+        let cy = p.y;
+        if (p.y >= 17 && p.x >= 86) {
+          // Slide and rotate fingers based on computed phi
+          if (p.x < 95) {
+            // Left finger: rotate around (86, 17) and slide left
+            const rLocal = rotate(p.x - 86, p.y - 17, phi);
+            cx = 86 + rLocal.x - phi * 10;
+            cy = 17 + rLocal.y;
+          } else {
+            // Right finger: rotate around (104, 17) and slide right
+            const rLocal = rotate(p.x - 104, p.y - 17, -phi);
+            cx = 104 + rLocal.x + phi * 10;
+            cy = 17 + rLocal.y;
+          }
+        }
+        // Rotate the entire claw (including animated fingers) around Wrist pivot
+        const r = rotate(cx - 75, cy - 14, theta1 + theta2 + theta3);
+        wx = wx_wrist + r.x;
+        wy = wy_wrist + r.y;
+      }
+
+      // Center the arm coordinates on the canvas
+      set(wx + offsetX, wy + offsetY, p.ch, p.color);
+    });
+
+    // Draw downsampled animated box
+    boxPoints.forEach((pt) => {
+      set(bx + pt.dx + offsetX, by + pt.dy + offsetY, pt.ch, pt.color);
+    });
+
+    // Blinking status HUD overlay inside the canvas
+    if (Math.floor(time * 2) % 2 === 0) {
+      set(C - 2, 2, "_", COL.hud);
+    }
+
+    // Paint to canvas
     ctx.clearRect(0, 0, W, H);
     ctx.font = fontPx + "px 'IBM Plex Mono', ui-monospace, monospace";
     ctx.textBaseline = "top";
@@ -203,11 +525,15 @@ export function initRoboticArm(box: HTMLElement, canvas: HTMLCanvasElement): Arm
         ctx.fillText(ch, x * cellW, y * cellH);
       }
     }
-  };
+    return true;
+  }
 
   const loop = () => {
     if (!running) return;
-    if (isVisible) drawFrame();
+    if (isVisible) {
+      const drew = drawFrame();
+      if (drew && prefersReduced) { running = false; return; }
+    }
     raf = requestAnimationFrame(loop);
   };
 
@@ -227,19 +553,20 @@ export function initRoboticArm(box: HTMLElement, canvas: HTMLCanvasElement): Arm
   }
 
   resize();
-
-  if (prefersReduced) {
-    drawFrame();
-  } else {
-    running = true;
-    raf = requestAnimationFrame(loop);
+  if (typeof document !== "undefined" && document.fonts?.ready) {
+    document.fonts.ready.then(() => resize());
   }
+  window.addEventListener("load", onResize, { once: true });
+
+  running = true;
+  raf = requestAnimationFrame(loop);
 
   return {
     cleanup() {
       running = false;
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("load", onResize);
       ro?.disconnect();
       io?.disconnect();
     },
